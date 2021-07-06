@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: libpng-bins
+Version: 0.0.3
+Summary: Libraries for LibPNG on Alpine Linux
+Home-page: https://github.com/spencer-hanson/libpng
+Author: Spencer Hanson
+Author-email: UNKNOWN
+License: UNKNOWN
+Description: Libraries for LibPNG on Alpine Linux
+Keywords: libpng
+Platform: UNKNOWN
