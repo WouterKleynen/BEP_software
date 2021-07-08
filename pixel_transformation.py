@@ -1,49 +1,59 @@
 import cv2
-import numpy as np
 import minkowski_geodesics_plot as mgp
+import schwarzschild_geodesics_plot as schgp
 import time
+import matplotlib.pyplot as plt
+from shutil import copyfile
+import warnings
 
-timeout = time.time() + 30   # 5 minutes from now
+# Numpy throws a RuntimeWarning when 0 is divided by 0 in the origin. We simply skip this value. 
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-input_path = 'C://Users//woute//Downloads//rainbow-sq_input.jpg'
-output_path = 'C://Users//woute//Downloads//rainbow-sq_output.jpg'
-
-input_image = cv2.imread(input_path)
-output_image = cv2.imread(output_path)
-
-x = output_image.shape[0]
-y = output_image.shape[1]
-
-dt = 0.005
-t_end = 20
-
-# turn output image white
-for i in range(1, x):
-    for j in range(1, y):
-        output_image[i, j] = [255, 255, 255]
-
-cv2.imwrite(output_path, output_image)
+test_input = 'input_transformable_images//100x100_car.jpg'
+test_output = 'output_transformable_images//100x100_car.jpg'
 
 
-for i in range(1, x):
-    for j in range(1, y):
-        R, G, B = input_image[i][j]
-        pixel_x_end_float, pixel_y_end_float  = mgp.create_specific_minkowski_geodesic(i, j, dt, t_end)
-        pixel_x_end_int = round(pixel_x_end_float)
-        pixel_y_end_int = round(pixel_y_end_float)
-        output_image[pixel_x_end_int, pixel_y_end_int, 0] = R
-        output_image[pixel_x_end_int, pixel_y_end_int, 1] = G
-        output_image[pixel_x_end_int, pixel_y_end_int, 2] = B
-        if time.time() > timeout:
-            break
-        cv2.imshow('image', output_image)
-        cv2.waitKey(1)
+def create_transformed_image(metric, input_path=test_input, output_path=test_output):
 
-cv2.imwrite(output_path, output_image)
+    copyfile(test_input, test_output)
+    timeout = time.time() + 80  # 5 minutes from now
 
+    input_image = cv2.imread(input_path)
+    output_image = cv2.imread(output_path)
 
+    x = input_image.shape[0]
+    y = input_image.shape[1]
 
+    dt = 0.005
+    t_end = 20
 
+    # turn output image white
+    for i in range(0, x):
+        for j in range(0, y):
+            output_image[i, j] = [255, 255, 255]
 
+    cv2.imwrite(output_path, output_image)
 
+    for i in range(0, x):
+        for j in range(0, y):
+            R, G, B = input_image[i][j]
+            try:
+                if metric == 'Minkowski':
+                    pixel_x_end_float, pixel_y_end_float = mgp.create_specific_minkowski_geodesic(i-x/2.0, j-y/2.0, dt, t_end)
+                elif metric == 'Schwarzschild':
+                    pixel_x_end_float, pixel_y_end_float = mgp.create_specific_minkowski_geodesic(i-x/2.0, j-y/2.0, dt, t_end)
+                else:
+                    break
+            except ZeroDivisionError:
+                continue
+            pixel_x_end_int = round(pixel_x_end_float + x/2)
+            pixel_y_end_int = round(pixel_y_end_float + y/2)
+            output_image[pixel_x_end_int, pixel_y_end_int, 0] = R
+            output_image[pixel_x_end_int, pixel_y_end_int, 1] = G
+            output_image[pixel_x_end_int, pixel_y_end_int, 2] = B
+            if time.time() > timeout:
+                break
+            cv2.imshow('image', output_image)
+            cv2.waitKey(1)
 
+    cv2.imwrite(output_path, output_image)

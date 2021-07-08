@@ -28,9 +28,7 @@ def create_specific_minkowski_geodesic(x_start, y_start, dt, t_end):
     r_solver = U[:, 0]
     theta_solver = U[:, 1]
     phi_solver = U[:, 2]
-    X, Y, Z = ccs.conversion_coordinate_spherical_to_cartesian(r_solver, theta_solver, phi_solver)
-    x_end = X[-1]
-    y_end = Y[-1]
+    x_end, y_end, z_end = ccs.conversion_coordinate_spherical_to_cartesian(r_solver[-1], theta_solver[-1], phi_solver[-1])
     return x_end, y_end
 
 
@@ -61,35 +59,6 @@ def create_minkowski_geodesics_loop(dt, t_end):
             ax.plot3D(X, Y, Z, 'blue')
     plt.show()
     return x_start_series_minkowski, y_start_series_minkowski, x_end_series_minkowski, y_end_series_minkowski
-
-
-def create_schwarschild_geodesics_loop(dt, t_end):
-    fig = plt.figure()
-
-    ax = plt.axes(projection='3d')
-    ax.set_zlim3d(-12, 12)
-
-    # define dt, t and r
-    t = np.arange(0, t_end, dt)  # create array for t
-
-    for i in range(0, 10):
-        for j in range(0, 10):
-            x_start = 10 - i
-            y_start = 10 - j
-            z_start = -10
-            x_start_series_schwarzschild.append(x_start)
-            y_start_series_schwarzschild.append(y_start)
-            initial_spherical = ccs.form_initial_spherical_vector(x_start, y_start, z_start, 0, 0, 1)
-            U = odeint(schns.python_solver_schwarzschild, initial_spherical, t)
-            r_solver     = U[:, 1]
-            theta_solver = U[:, 2]
-            phi_solver   = U[:, 3]
-            X, Y, Z = ccs.conversion_coordinate_spherical_to_cartesian(r_solver, theta_solver, phi_solver)
-            x_end_series_schwarzschild.append(X[-1])
-            y_end_series_schwarzschild.append(Y[-1])
-            ax.plot3D(X, Y, Z, 'blue')
-    plt.show()
-    return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
 
 
 def create_photo(x_series, y_series, plot_title):

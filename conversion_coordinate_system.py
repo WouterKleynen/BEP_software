@@ -1,18 +1,30 @@
-import math
 import numpy as np
+
+
+def atan2(Y, X):
+    if X > 0:
+        return np.arctan(float(Y)/float(X))
+    if X < 0 and Y >= 0:
+        return np.arctan(float(Y)/float(X)) + np.pi
+    if X < 0 and Y < 0:
+        return np.arctan(float(Y) / float(X)) - np.pi
+    if X == 0 and Y > 0:
+        return np.pi/2.0
+    if X == 0 and Y < 0:
+        return -np.pi/2.0
 
 
 def conversion_coordinate_cartesian_to_spherical(X, Y, Z):
     r = np.sqrt(X**2+Y**2+Z**2)
     theta = np.arccos(float(Z)/float(r))
-    phi = np.arctan(float(Y)/float(X))
+    phi = atan2(Y, X)
     return r, theta, phi
 
 
 def conversion_coordinate_spherical_to_cartesian(r, theta, phi):
-    X = r*np.sin(theta) * np.cos(phi % (2 * math.pi))
-    Y = r*np.sin(theta) * np.sin(phi % (2 * math.pi))
-    Z = r*np.cos(theta)
+    X = r * np.sin(theta) * np.cos(phi)
+    Y = r * np.sin(theta) * np.sin(phi)
+    Z = r * np.cos(theta)
     return X, Y, Z
 
 

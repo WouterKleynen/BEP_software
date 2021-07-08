@@ -7,6 +7,7 @@ from scipy.integrate import odeint
 import plotter
 import minkowski_geodesics_plot
 import schwarzschild_numerical_solver as schns
+import pixel_transformation
 
 # define dt, t and r
 dt = 0.005                     # define dt
@@ -72,8 +73,12 @@ initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Schwarzschild geodesic")
 
 # Plot the geodesics of the Minkowski space
-t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
-x_start, y_start, x_end, y_end = schwarzschild_geodesics_plot.create_schwarschild_geodesics_loop(dt, t_end)
-schwarzschild_geodesics_plot.create_photo(x_start, y_start, 'start photo Schwarzschild')
-schwarzschild_geodesics_plot.create_photo(x_end, y_end, 'end photo Schwarzschild')
+# t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
+# x_start, y_start, x_end, y_end = schwarzschild_geodesics_plot.create_schwarschild_geodesics_loop(dt, t_end)
+# schwarzschild_geodesics_plot.create_photo(x_start, y_start, 'start photo Schwarzschild')
+# schwarzschild_geodesics_plot.create_photo(x_end, y_end, 'end photo Schwarzschild')
 
+# Transform pixels
+pixel_transformation.create_transformed_image('Minkowski')
+
+#minkowski_geodesics_plot.create_specific_minkowski_geodesic(-6, 6, 0.05, 20)
