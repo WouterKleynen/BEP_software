@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import conversion_coordinate_system as ccs
+import conversion_formulas as cf
 
 
 def plot_trajectories(t, r, theta, phi, text):
@@ -29,7 +29,7 @@ def plot_three_dimensional_spherical(r, theta, phi, text):
     fig = plt.figure(figsize=(5, 5), dpi=100)
     ax = fig.add_subplot(111, projection='3d')
     ax.set_aspect('auto')
-    x, y, z = ccs.conversion_coordinate_spherical_to_cartesian(r, theta, phi)
+    x, y, z = cf.spherical_to_cartesian(r, theta, phi)
     ax.plot(x, y, z, 'r', lw=2)
     plt.title(text)
     plt.show()

@@ -1,12 +1,7 @@
 import numpy as np
 
-G = 6.674*10**-11
-M = 5.972*10**24
-c = 299792458
-r_s = 0.99
 
-
-def euler_method_schwarzschild(initial, n, dt):
+def euler_method(initial, n, dt, r_s):
     t      = np.ones(n) * initial[0]
     r      = np.ones(n) * initial[1]
     theta  = np.ones(n) * initial[2]
@@ -31,11 +26,11 @@ def euler_method_schwarzschild(initial, n, dt):
     return [t, r, theta, phi, v_0, v_1, v_2, v_3]
 
 
-def python_solver_schwarzschild(variables, t):
-    t, r, theta, phi, v_zero, v_one, v_two, v_three = variables
+def python_solver(initial_values, t, r_s, c):
+    t, r, theta, phi, v_zero, v_one, v_two, v_three = initial_values
     d_v_zero = - r_s / (r * (r - r_s)) * v_zero * v_one
     d_v_one = - (r_s * (r - r_s) / (2.0 * r ** 3)) * v_zero ** 2 + (r_s / (2 * r * (r - r_s))) * v_one ** 2 + \
-              (r - r_s) * (v_two ** 2 + np.sin(theta) ** 2 * v_three ** 2)
+                  (r - r_s) * (v_two ** 2 + np.sin(theta) ** 2 * v_three ** 2)
     d_v_two = - (2.0 / r) * v_two * v_one + np.sin(theta) * np.cos(theta) * v_three ** 2
     d_v_three = -(2.0 / r) * v_one * v_three - 2 * (np.cos(theta) / np.sin(theta)) * v_two * v_three
     d_t = v_zero

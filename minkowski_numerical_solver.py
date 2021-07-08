@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def euler_method_minkowski(initial, n, dt):
+def euler_method(initial, n, dt):
     r = np.ones(n)*initial[0]
     theta = np.ones(n)*initial[1]
     phi  = np.ones(n)*initial[2]
@@ -20,7 +20,7 @@ def euler_method_minkowski(initial, n, dt):
     return [r, theta, phi, v_1, v_2, v_3]
 
 
-def python_solver_minkowski(variables, t):
+def python_solver(variables, t):
     r, theta, phi, v_one, v_two, v_three = variables
     d_v_one   = r * v_two ** 2 + r * np.sin(theta) ** 2 * v_three ** 2
     d_v_two   = -2*(v_two * v_one) / r + np.sin(theta) * np.cos(theta) * v_three ** 2

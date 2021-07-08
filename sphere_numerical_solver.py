@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def euler_method_sphere(initial, n, dt):
+def euler_method(initial, n, dt):
     theta = np.ones(n)*initial[0]
     phi  = np.ones(n)*initial[1]
     v_1  = np.ones(n)*initial[2]
@@ -15,7 +15,7 @@ def euler_method_sphere(initial, n, dt):
     return [theta, phi, v_1, v_2]
 
 
-def python_solver_sphere(variables, t):
+def python_solver(variables, t):
     v_1, v_2, theta, phi = variables
     dv_1 = np.cos(theta) * np.sin(theta) * v_2 ** 2
     dv_2 = -2 * (np.cos(theta) / np.sin(theta)) * v_1 * v_2

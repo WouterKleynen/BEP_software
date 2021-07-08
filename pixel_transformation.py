@@ -1,12 +1,12 @@
 import cv2
-import minkowski_geodesics_plot as mgp
-import schwarzschild_geodesics_plot as schgp
+import minkowski_geodesic_construction
+import schwarzschild_geodesic_construction
 import time
 import matplotlib.pyplot as plt
 from shutil import copyfile
 import warnings
 
-# Numpy throws a RuntimeWarning when 0 is divided by 0 in the origin. We simply skip this value. 
+# Numpy throws a RuntimeWarning when 0 is divided by 0 in the origin. We simply skip this value.
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 test_input = 'input_transformable_images//100x100_car.jpg'
@@ -39,9 +39,10 @@ def create_transformed_image(metric, input_path=test_input, output_path=test_out
             R, G, B = input_image[i][j]
             try:
                 if metric == 'Minkowski':
-                    pixel_x_end_float, pixel_y_end_float = mgp.create_specific_minkowski_geodesic(i-x/2.0, j-y/2.0, dt, t_end)
+                    pixel_x_end_float, pixel_y_end_float = minkowski_geodesic_construction.create_specified_geodesic(
+                        i - x / 2.0, j - y / 2.0, dt, t_end)
                 elif metric == 'Schwarzschild':
-                    pixel_x_end_float, pixel_y_end_float = mgp.create_specific_minkowski_geodesic(i-x/2.0, j-y/2.0, dt, t_end)
+                    pixel_x_end_float, pixel_y_end_float = schwarzschild_geodesic_construction.c(i-x/2.0, j-y/2.0, dt, t_end)
                 else:
                     break
             except ZeroDivisionError:
