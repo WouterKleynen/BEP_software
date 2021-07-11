@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 import schwarzschild_geodesic_construction
 import sphere_numerical_solver
@@ -79,10 +80,17 @@ initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 # print(odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(r_s, 0))[0][-1])
 
 
+# x_start_test, y_start_test, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, t_end)
+# minkowski_geodesic_construction.create_photo(x_start_test, y_start_test, 'start field Minowski')
+# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Minowski')
+
 # Plot the geodesics of the Minkowski space
 x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
-schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start photo Schwarzschild')
-schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end photo Schwarzschild')
+minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
+minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
+
+# schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start photo Schwarzschild')
+# schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end photo Schwarzschild')
 
 # Transform pixels
 # pixel_transformation.create_transformed_image('Minkowski')

@@ -32,8 +32,8 @@ def create_geodesic_field(dt, t_end):
 
     t = np.arange(0, t_end, dt)  # create array for t
 
-    for i in range(0, 20):
-        for j in range(0, 20):
+    for i in range(0, 21):
+        for j in range(0, 21):
             x_start = 10 - i
             y_start = 10 - j
             z_start = -10
@@ -46,10 +46,10 @@ def create_geodesic_field(dt, t_end):
                 r_solver        = U[:, 0]
                 theta_solver    = U[:, 1]
                 phi_solver      = U[:, 2]
-                x_end, y_end, z_end = conversion_formulas.spherical_to_cartesian(r_solver[-1], theta_solver[-1], phi_solver[-1])
-                x_end_series_minkowski.append(x_end)
-                y_end_series_minkowski.append(y_end)
-                ax.plot3D(x_end, y_end, z_end, 'blue')
+                X, Y, Z = conversion_formulas.spherical_to_cartesian(r_solver, theta_solver, phi_solver)
+                x_end_series_minkowski.append(X[-1])
+                y_end_series_minkowski.append(Y[-1])
+                ax.plot3D(X, Y, Z, 'blue')
             except ZeroDivisionError:
                 continue
     plt.show()
