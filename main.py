@@ -81,8 +81,8 @@ r_s = 0.5
 
 # Plot the geodesics of the Schwarzschild space
 # x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
-# minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
-# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
+# schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
+# schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
 
 # Transform pixels
 # pixel_transformation.create_transformed_image('Minkowski')
