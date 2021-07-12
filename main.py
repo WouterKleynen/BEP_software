@@ -21,7 +21,7 @@ r = 1                          # unit sphere
 # initial_sphere = [1, 1, 1, 1]
 
 # Eulers method for the sphere
-# theta_numerical, phi_numerical, v_1_numerical, v_2_numerical = sphere_numerical_solver.euler_method_sphere(initial_sphere, n, dt)
+# theta_numerical, phi_numerical, v_1_numerical, v_2_numerical = sphere_numerical_solver.euler_method(initial_sphere, n, dt)
 # plotter.plot_phi_to_theta(phi_numerical, theta_numerical, "by using eulers method for the sphere")
 # plotter.plot_trajectories(t, r, theta_numerical, phi_numerical, "trajectories by using eulers method for the sphere")
 # plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_numerical, phi_numerical, "3D plot by using eulers method for the sphere")
@@ -56,10 +56,10 @@ t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
 # minkowski_geodesics_plot.create_photo(x_start, y_start, 'start photo Minkowski space')
 # minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')
 
-r_s = 0.99
+r_s = 0.5
 
 # define initial condtion for Schwarzschild metric
-initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
+# initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 
 # Eulers method for Schwarzschild metric
 # t_numerical, r_numerical, theta_numerical, phi_numerical, v_0_numerical, v_1_numerical, v_2_numerical, v_3_numerical = schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)
@@ -88,9 +88,6 @@ initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
 minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
 minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
-
-# schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start photo Schwarzschild')
-# schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end photo Schwarzschild')
 
 # Transform pixels
 # pixel_transformation.create_transformed_image('Minkowski')

@@ -56,19 +56,18 @@ def create_geodesics_field(dt, t_end, r_s):
                 initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
                 U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(0.5, 0))
                 r_solver     = U[:, 1]
-                theta_solver = U[:, 2]
-                phi_solver   = U[:, 3]
-                X, Y, Z = ccs.spherical_to_cartesian(r_solver, theta_solver, phi_solver)
-                x_end_series_schwarzschild.append(X[-1])
-                y_end_series_schwarzschild.append(Y[-1])
-                ax.plot3D(X, Y, Z, 'blue')
+                if not all(r > r_s for r in r_solver):  # check if within Schwarzschild radius
+                    continue
+                else:
+                    theta_solver = U[:, 2]
+                    phi_solver   = U[:, 3]
+                    X, Y, Z = ccs.spherical_to_cartesian(r_solver, theta_solver, phi_solver)
+                    x_end_series_schwarzschild.append(X[-1])
+                    y_end_series_schwarzschild.append(Y[-1])
+                    ax.plot3D(X, Y, Z, 'blue')
             except scipy.integrate.odepack.ODEintWarning:
-                print('Ode freaky')
-                print(x_start, y_start)
                 continue
             except ZeroDivisionError:
-                print("zero division error")
-                print(x_start, y_start)
                 continue
     plt.show()
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
