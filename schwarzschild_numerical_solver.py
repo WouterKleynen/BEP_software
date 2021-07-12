@@ -26,7 +26,7 @@ def euler_method(initial, n, dt, r_s):
     return [t, r, theta, phi, v_0, v_1, v_2, v_3]
 
 
-def python_solver(initial_values, t, r_s, c):
+def python_solver(initial_values, t, r_s):
     t, r, theta, phi, v_zero, v_one, v_two, v_three = initial_values
     d_v_zero = - r_s / (r * (r - r_s)) * v_zero * v_one
     d_v_one = - (r_s * (r - r_s) / (2.0 * r ** 3)) * v_zero ** 2 + (r_s / (2 * r * (r - r_s))) * v_one ** 2 + \

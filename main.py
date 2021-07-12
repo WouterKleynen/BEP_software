@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from straight_line import create_straight_line
 import schwarzschild_geodesic_construction
 import sphere_numerical_solver
 import minkowski_numerical_solver
@@ -10,8 +10,12 @@ import minkowski_geodesic_construction
 import schwarzschild_numerical_solver
 import pixel_transformation
 
+
+# create straight line for first image
+# create_straight_line()
+
 # define dt, t and r
-dt = 0.05                     # define dt
+dt = 0.005                     # define dt
 t_end = 6                      # t end value
 t = np.arange(0, t_end, dt)    # create array for t
 n = len(t)                     # define n for loop
@@ -27,7 +31,7 @@ r = 1                          # unit sphere
 # plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_numerical, phi_numerical, "3D plot by using eulers method for the sphere")
 
 # Python solver for the sphere
-# solver_output = odeint(sphere_numerical_solver.python_solver_sphere, initial_sphere, t)
+# solver_output = odeint(sphere_numerical_solver.python_solver, initial_sphere, t)
 # theta_solver   = solver_output[:, 2]
 # phi_solver     = solver_output[:, 3]
 # plotter.plot_phi_to_theta(phi_solver, theta_solver, "by using a python solver for the sphere")
@@ -38,7 +42,7 @@ r = 1                          # unit sphere
 # initial_minkowksi = [1, 1, 1, 1, 1, 1]
 
 # Eulers method for Minkowski space
-# r_numerical, theta_numerical, phi_numerical, v_1_numerical, v_2_numerical, v_3_numerical = minkowski_numerical_solver.euler_method(initial, n, dt)
+# r_numerical, theta_numerical, phi_numerical, v_1_numerical, v_2_numerical, v_3_numerical = minkowski_numerical_solver.euler_method(initial_minkowksi, n, dt)
 # plotter.plot_trajectories(t, r_numerical, theta_numerical, phi_numerical, "trajectories by using eulers method for Minkowski space")
 # plotter.plot_three_dimensional_spherical(r_numerical, theta_numerical, phi_numerical, "3D plot by using eulers method for Minkowksi space")
 
@@ -52,9 +56,9 @@ r = 1                          # unit sphere
 
 # Plot the geodesics of the Minkowski space
 t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
-# x_start, y_start, x_end, y_end = minkowski_geodesics_plot.create_minkowski_geodesics_loop(dt, t_end)
-# minkowski_geodesics_plot.create_photo(x_start, y_start, 'start photo Minkowski space')
-# minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')
+# x_start, y_start, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, t_end)
+# minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Minkowski space')
+# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Minkowski space')
 
 r_s = 0.5
 
@@ -67,7 +71,7 @@ r_s = 0.5
 # plotter.plot_three_dimensional_spherical(r_numerical, theta_numerical, phi_numerical, "3D plot by using eulers method for Schwarzschild geodesic")
 
 # Python solver for Schwarzschild space
-# schwarzscild_instance = schwarzschild_numerical_solver.schwarzschild_metric(r_s)
+# U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
 # t_solver       = U[:, 0]
 # r_solver       = U[:, 1]
 # theta_solver   = U[:, 2]
@@ -75,19 +79,10 @@ r_s = 0.5
 # plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories by using a python solver for Schwarzschild geodesic")
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Schwarzschild geodesic")
 
-# schwarzschild_geodesic_construction.create_specified_geodesic(10, 6, dt, t_end, 0.5)
-# print(schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)[5][-1])
-# print(odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(r_s, 0))[0][-1])
-
-
-# x_start_test, y_start_test, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, t_end)
-# minkowski_geodesic_construction.create_photo(x_start_test, y_start_test, 'start field Minowski')
-# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Minowski')
-
-# Plot the geodesics of the Minkowski space
-x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
-minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
-minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
+# Plot the geodesics of the Schwarzschild space
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
+# minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
+# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
 
 # Transform pixels
 # pixel_transformation.create_transformed_image('Minkowski')
