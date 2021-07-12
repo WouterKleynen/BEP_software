@@ -75,8 +75,6 @@ def create_geodesics_field(dt, t_end, r_s):
 
 # create X Y scattered plot
 def create_photo(x_series, y_series, plot_title):
-    x_series = np.array(x_series, dtype=float)
-    y_series = np.array(y_series, dtype=float)
     plt.scatter(x_series, y_series)
     plt.title(plot_title)
     plt.show()

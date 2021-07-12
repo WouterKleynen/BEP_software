@@ -56,7 +56,7 @@ t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
 # minkowski_geodesics_plot.create_photo(x_start, y_start, 'start photo Minkowski space')
 # minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')
 
-r_s = 0.5
+r_s = 5
 
 # define initial condtion for Schwarzschild metric
 # initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
@@ -86,8 +86,8 @@ r_s = 0.5
 
 # Plot the geodesics of the Minkowski space
 x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
-minkowski_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
-minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
+schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
+schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
 
 # Transform pixels
 # pixel_transformation.create_transformed_image('Minkowski')
