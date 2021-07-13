@@ -13,7 +13,7 @@ test_input = 'input_transformable_images//100x100_car.jpg'
 test_output = 'output_transformable_images//100x100_car.jpg'
 
 
-def create_transformed_image(metric, input_path=test_input, output_path=test_output):
+def create_transformed_image(input_path=test_input, output_path=test_output):
 
     copyfile(test_input, test_output)
     timeout = time.time() + 80  # 5 minutes from now
@@ -38,13 +38,8 @@ def create_transformed_image(metric, input_path=test_input, output_path=test_out
         for j in range(0, y):
             R, G, B = input_image[i][j]
             try:
-                if metric == 'Minkowski':
-                    pixel_x_end_float, pixel_y_end_float = minkowski_geodesic_construction.create_specified_geodesic(
-                        i - x / 2.0, j - y / 2.0, dt, t_end)
-                elif metric == 'Schwarzschild':
-                    pixel_x_end_float, pixel_y_end_float = schwarzschild_geodesic_construction.c(i-x/2.0, j-y/2.0, dt, t_end)
-                else:
-                    break
+                pixel_x_end_float, pixel_y_end_float = minkowski_geodesic_construction.create_specified_geodesic(
+                    i - x / 2.0, j - y / 2.0, dt, t_end)
             except ZeroDivisionError:
                 continue
             pixel_x_end_int = round(pixel_x_end_float + x/2)

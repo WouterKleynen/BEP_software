@@ -29,7 +29,7 @@ def create_specified_geodesic(x_start, y_start, dt, t_end, r_s):
     # print(r_solver[0], theta_solver[0], phi_solver[0])
     # x_end, y_end, z_end = ccs.spherical_to_cartesian(r_solver[-1], theta_solver[-1], phi_solver[-1])
     # print(x_end, y_end)
-    U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(0.5, 0))
+    U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
     r_solver = U[:, 1]
     theta_solver = U[:, 2]
     phi_solver = U[:, 3]
@@ -54,7 +54,7 @@ def create_geodesics_field(dt, t_end, r_s):
             y_start_series_schwarzschild.append(y_start)
             try:
                 initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
-                U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(0.5, 0))
+                U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
                 r_solver     = U[:, 1]
                 if not all(r > r_s for r in r_solver):  # check if within Schwarzschild radius
                     continue
