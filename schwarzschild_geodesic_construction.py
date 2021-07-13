@@ -5,7 +5,9 @@ import scipy.integrate.odepack
 import conversion_formulas as ccs
 from scipy.integrate import odeint
 import schwarzschild_numerical_solver
+import events_tester
 import warnings
+
 warnings.filterwarnings("error")
 
 
@@ -45,16 +47,18 @@ def create_geodesics_field(dt, t_end, r_s):
 
     t = np.arange(0, t_end, dt)  # create array for t
 
-    for i in range(0, 21):
-        for j in range(0, 21):
-            x_start = 10 - i
-            y_start = 10 - j
+    for i in range(0, 7):
+        for j in range(0, 7):
+            x_start = 3 - i
+            y_start = 3 - j
             z_start = -10
             x_start_series_schwarzschild.append(x_start)
             y_start_series_schwarzschild.append(y_start)
             try:
                 initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
+                events_tester.do_run(0, t_end, initial_schwarzschild, r_s)
                 U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
+
                 r_solver     = U[:, 1]
                 if not all(r > r_s for r in r_solver):  # check if within Schwarzschild radius
                     continue
@@ -69,6 +73,7 @@ def create_geodesics_field(dt, t_end, r_s):
                 continue
             except ZeroDivisionError:
                 continue
+    ax.title.set_text('r_s = ' + str(r_s) + ', t = ' + str(t_end))
     plt.show()
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
 

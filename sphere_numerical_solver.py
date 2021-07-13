@@ -22,3 +22,4 @@ def python_solver(variables, t):
     d_theta = v_1
     d_phi = v_2
     return [dv_1, dv_2, d_theta, d_phi]
+

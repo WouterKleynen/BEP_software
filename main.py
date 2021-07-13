@@ -56,10 +56,11 @@ t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
 # minkowski_geodesics_plot.create_photo(x_start, y_start, 'start photo Minkowski space')
 # minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')
 
-r_s = 1
+# Define r_s
+r_s = 0.5
 
 # define initial condtion for Schwarzschild metric
-# initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
+initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 
 # Eulers method for Schwarzschild metric
 # t_numerical, r_numerical, theta_numerical, phi_numerical, v_0_numerical, v_1_numerical, v_2_numerical, v_3_numerical = schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)
@@ -67,28 +68,18 @@ r_s = 1
 # plotter.plot_three_dimensional_spherical(r_numerical, theta_numerical, phi_numerical, "3D plot by using eulers method for Schwarzschild geodesic")
 
 # Python solver for Schwarzschild space
-# schwarzscild_instance = schwarzschild_numerical_solver.schwarzschild_metric(r_s)
-# t_solver       = U[:, 0]
+# U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
 # r_solver       = U[:, 1]
 # theta_solver   = U[:, 2]
 # phi_solver     = U[:, 3]
 # plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories by using a python solver for Schwarzschild geodesic")
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Schwarzschild geodesic")
-
-# schwarzschild_geodesic_construction.create_specified_geodesic(10, 6, dt, t_end, 0.5)
-# print(schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)[5][-1])
-# print(odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, args=(r_s, 0))[0][-1])
-
-
-# x_start_test, y_start_test, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, t_end)
-# minkowski_geodesic_construction.create_photo(x_start_test, y_start_test, 'start field Minowski')
-# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end field Minowski')
-
-# Plot the geodesics of the Minkowski space
-x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
-schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild')
-schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild')
-
 # Transform pixels
-pixel_transformation.create_transformed_image()
+
+# Plot the geodesics of the Schwarzschild space
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
+# schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
+# schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
+
+# pixel_transformation.create_transformed_image()
 
