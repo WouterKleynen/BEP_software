@@ -79,7 +79,7 @@ initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 # Transform pixels
 
 # Plot the geodesics of the Schwarzschild space
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
 # schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
 # schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
 

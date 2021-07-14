@@ -47,8 +47,8 @@ def python_solver_with_termination(t, tend, V, r_s):
         t = sol.t[-1]
         u = sol.y[:, -1].copy()
         print(t)
-        return
+        return sol.y
     else:
         print('lost geodesic')
-        return
+        return sol.y
 
