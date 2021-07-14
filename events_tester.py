@@ -22,6 +22,10 @@ def event(t, u, r_s):
     return Z - 10
 
 
+def event2(t, u, r_s):
+    return r_s - u[1]
+
+
 event.terminal = True
 
 
@@ -46,9 +50,8 @@ def python_solver_with_termination(t, tend, V, r_s):
     if sol.status == 1:
         t = sol.t[-1]
         u = sol.y[:, -1].copy()
-        print(t)
         return sol.y
     else:
         print('lost geodesic')
-        return sol.y
+        return None
 
