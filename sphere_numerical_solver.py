@@ -15,7 +15,7 @@ def euler_method(initial, n, dt):
     return [theta, phi, v_1, v_2]
 
 
-def python_solver(variables, t):
+def python_solver_INT(variables, t):
     v_1, v_2, theta, phi = variables
     dv_1 = np.cos(theta) * np.sin(theta) * v_2 ** 2
     dv_2 = -2 * (np.cos(theta) / np.sin(theta)) * v_1 * v_2
@@ -23,3 +23,11 @@ def python_solver(variables, t):
     d_phi = v_2
     return [dv_1, dv_2, d_theta, d_phi]
 
+
+def python_solver_IPV(t, variables):
+    v_1, v_2, theta, phi = variables
+    dv_1 = np.cos(theta) * np.sin(theta) * v_2 ** 2
+    dv_2 = -2 * (np.cos(theta) / np.sin(theta)) * v_1 * v_2
+    d_theta = v_1
+    d_phi = v_2
+    return [dv_1, dv_2, d_theta, d_phi]

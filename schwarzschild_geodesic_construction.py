@@ -8,7 +8,7 @@ import schwarzschild_numerical_solver
 import events_tester
 import warnings
 
-warnings.filterwarnings("error")
+# warnings.filterwarnings("error")
 
 
 x_start_series_schwarzschild = []
@@ -59,7 +59,7 @@ def create_geodesics_field(dt, t_end, r_s):
                 initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
                 U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
                 try:
-                    events_tester.python_solver_with_termination(0, t_end, initial_schwarzschild, r_s)
+                    events_tester.python_solver_with_termination(t, t_end, initial_schwarzschild, r_s)
                 except UserWarning:
                     continue
                 r_solver     = U[:, 1]

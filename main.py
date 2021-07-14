@@ -5,6 +5,7 @@ import schwarzschild_geodesic_construction
 import sphere_numerical_solver
 import minkowski_numerical_solver
 from scipy.integrate import odeint
+from scipy.integrate import solve_ivp
 import plotter
 import minkowski_geodesic_construction
 import schwarzschild_numerical_solver
@@ -18,7 +19,7 @@ n = len(t)                     # define n for loop
 r = 1                          # unit sphere
 
 # define initial condtion for the sphere: theta, phi, velocity_theta, velocity_phi
-# initial_sphere = [1, 1, 1, 1]
+initial_sphere = [1, 1, 1, 1]
 
 # Eulers method for the sphere
 # theta_numerical, phi_numerical, v_1_numerical, v_2_numerical = sphere_numerical_solver.euler_method(initial_sphere, n, dt)
@@ -27,8 +28,9 @@ r = 1                          # unit sphere
 # plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_numerical, phi_numerical, "3D plot by using eulers method for the sphere")
 
 # Python solver for the sphere
-# solver_output = odeint(sphere_numerical_solver.python_solver_sphere, initial_sphere, t)
-# theta_solver   = solver_output[:, 2]
+# solver_output = odeint(sphere_numerical_solver.python_solver, initial_sphere, t)
+# sol = solve_ivp(sphere_numerical_solver.python_solver_IPV, (0, t_end), initial_sphere, method='LSODA', t_eval=t)
+# print(theta_solver)
 # phi_solver     = solver_output[:, 3]
 # plotter.plot_phi_to_theta(phi_solver, theta_solver, "by using a python solver for the sphere")
 # plotter.plot_trajectories(t, r, theta_solver, phi_solver, "trajectories by using a pyhton solver for the sphere")
@@ -77,7 +79,7 @@ initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
 # Transform pixels
 
 # Plot the geodesics of the Schwarzschild space
-x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, r_s)
 # schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
 # schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
 

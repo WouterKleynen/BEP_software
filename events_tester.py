@@ -40,7 +40,7 @@ def fun3(t, variables, r_s):
 
 
 def python_solver_with_termination(t, tend, V, r_s):
-    sol = solve_ivp(fun3, (t, tend), V, method='LSODA', events=event, args=(r_s,))
+    sol = solve_ivp(fun3, (0, tend), V, method='LSODA', events=event, args=(r_s,), t_eval=t)
     ts.append(sol.t)
     ys.append(sol.y)
     if sol.status == 1:
