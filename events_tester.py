@@ -6,11 +6,19 @@ import conversion_formulas
 ts = []
 ys = []
 
+# u_list = [0, 1, 2]
+# breaking = False
+
 
 # Define event function and make it a terminal event
 def event(t, u, r_s):
+    # u_list.append(u[1])
+    # if u_list[-3] == u_list[-2] == u_list[-1] == u[1]:
+    #    global breaking
+    #    breaking = True
+    #    print('Yeet')
+    #    print(u[1])
     X, Y, Z = conversion_formulas.spherical_to_cartesian(u[1], u[2], u[3])
-    print(Z)
     return Z - 10
 
 
@@ -31,16 +39,16 @@ def fun3(t, variables, r_s):
     return [d_t, d_r, d_theta, d_phi, d_v_zero, d_v_one, d_v_two, d_v_three]
 
 
-def do_run(t, tend, V, r_s):
-    while True:
-        sol = solve_ivp(fun3, (t, tend), V, method='LSODA', events=event, args=(r_s,))
-        ts.append(sol.t)
-        ys.append(sol.y)
-        if sol.status == 1:
-            t = sol.t[-1]
-            print(t)
-            u = sol.y[:, -1].copy()
-            break
-        else:
-            break
-    print(sol.y[0][0])
+def python_solver_with_termination(t, tend, V, r_s):
+    sol = solve_ivp(fun3, (t, tend), V, method='LSODA', events=event, args=(r_s,))
+    ts.append(sol.t)
+    ys.append(sol.y)
+    if sol.status == 1:
+        t = sol.t[-1]
+        u = sol.y[:, -1].copy()
+        print(t)
+        return
+    else:
+        print('lost geodesic')
+        return
+

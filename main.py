@@ -51,7 +51,7 @@ r = 1                          # unit sphere
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Minkowksi space")
 
 # Plot the geodesics of the Minkowski space
-t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
+t_end = 40  # increase t to make sure the rays go from Z = -10 to Z = 10
 # x_start, y_start, x_end, y_end = minkowski_geodesics_plot.create_minkowski_geodesics_loop(dt, t_end)
 # minkowski_geodesics_plot.create_photo(x_start, y_start, 'start photo Minkowski space')
 # minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')

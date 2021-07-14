@@ -54,11 +54,14 @@ def create_geodesics_field(dt, t_end, r_s):
             z_start = -10
             x_start_series_schwarzschild.append(x_start)
             y_start_series_schwarzschild.append(y_start)
+            print(x_start, y_start)
             try:
                 initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
-                events_tester.do_run(0, t_end, initial_schwarzschild, r_s)
                 U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s,))
-
+                try:
+                    events_tester.python_solver_with_termination(0, t_end, initial_schwarzschild, r_s)
+                except UserWarning:
+                    continue
                 r_solver     = U[:, 1]
                 if not all(r > r_s for r in r_solver):  # check if within Schwarzschild radius
                     continue
