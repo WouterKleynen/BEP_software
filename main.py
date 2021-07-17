@@ -59,7 +59,7 @@ t_end = 40  # increase t to make sure the rays go from Z = -10 to Z = 10
 # minkowski_geodesics_plot.create_photo(x_end, y_end, 'end photo Minkowski space')
 
 # Define r_s
-r_s = 0.5
+r_s = 0.99
 
 # define initial condtion for Schwarzschild metric
 initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]

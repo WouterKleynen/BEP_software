@@ -92,6 +92,8 @@ def create_geodesics_field(dt, t_end, r_s):
                 continue
             except ZeroDivisionError:
                 continue
+            except ValueError:
+                continue
     ax.title.set_text('r_s = ' + str(r_s) + ', t = ' + str(t_end))
     plt.show()
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
