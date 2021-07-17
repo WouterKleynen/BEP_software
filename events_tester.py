@@ -1,14 +1,6 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
 import conversion_formulas
-
-ts = []
-ys = []
-
-
-u_list = [0, 1, 2]
-# breaking = False
 
 
 # Stop at Z > 10
@@ -39,15 +31,17 @@ def fun3(t, variables, r_s):
 
 
 def python_solver_with_termination(t, tend, V, r_s):
-    sol = solve_ivp(fun3, (0, 2*tend), V, method='RK45', events=(event, event2), args=(r_s,), t_eval=t)
-    ts.append(sol.t)
-    ys.append(sol.y)
+    sol = solve_ivp(fun3, (0, 2*tend), V, method='Radau', events=(event, event2), args=(r_s,), t_eval=t, dense_output=True)
     if sol.status == 1:
         if len(sol.t_events[0]) > 0:
-            print('Z = 10 was reached')
+            # print('Z = 10 was reached')
             return sol.y
         if len(sol.t_events[1]) > 0:
-            print('Fell within singularity')
+            # print('Fell within singularity')
             return None
     elif sol.status == 0:
+        # print('Z = 10 was NOT reached, but the proces was finised')
+        # return sol.y -> Toggle this on to see all geodesics including lost ones
         return None
+
+
