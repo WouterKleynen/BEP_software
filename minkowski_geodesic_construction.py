@@ -22,7 +22,7 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end):
     return r_solver, theta_solver, phi_solver
 
 
-def create_geodesic_field(dt, t_end):
+def create_geodesic_field(dt, field_size, t_end):
     fig = plt.figure()
 
     ax = plt.axes(projection='3d')
@@ -30,8 +30,8 @@ def create_geodesic_field(dt, t_end):
 
     t = np.arange(0, t_end, dt)  # create array for t
 
-    for i in range(0, 21):
-        for j in range(0, 21):
+    for i in range(0, field_size + 1):
+        for j in range(0, field_size + 1):
             x_start = 10 - i
             y_start = 10 - j
             z_start = -10
