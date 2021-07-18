@@ -1,10 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.integrate.odepack
-
 import conversion_formulas as ccs
-from scipy.integrate import odeint
-import schwarzschild_numerical_solver
 import events_tester
 import warnings
 

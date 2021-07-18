@@ -16,9 +16,9 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end):
     y_start_series_minkowski.append(y_start)
     initial_spherical = conversion_formulas.form_bol_three_dimensional_vector(x_start, y_start, z_start, 0, 0, 1)
     U = odeint(minkowski_numerical_solver.python_solver, initial_spherical, t)
-    r_solver = U[:, 0]
+    r_solver     = U[:, 0]
     theta_solver = U[:, 1]
-    phi_solver = U[:, 2]
+    phi_solver   = U[:, 2]
     return r_solver, theta_solver, phi_solver
 
 
