@@ -39,7 +39,7 @@ def create_transformed_image(input_path=test_input, output_path=test_output):
             R, G, B = input_image[i][j]
             try:
                 pixel_x_end_float, pixel_y_end_float = minkowski_geodesic_construction.create_specified_geodesic(
-                    i - x / 2.0, j - y / 2.0, dt, t_end)
+                    i - x / 2.0, j - y / 2.0, -10, dt, t_end)
             except ZeroDivisionError:
                 continue
             pixel_x_end_int = round(pixel_x_end_float + x/2)

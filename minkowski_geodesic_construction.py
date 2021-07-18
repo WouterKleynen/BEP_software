@@ -10,9 +10,8 @@ x_end_series_minkowski = []
 y_end_series_minkowski = []
 
 
-def create_specified_geodesic(x_start, y_start, dt, t_end):
+def create_specified_geodesic(x_start, y_start, z_start, dt, t_end):
     t = np.arange(0, t_end, dt)
-    z_start = -10
     x_start_series_minkowski.append(x_start)
     y_start_series_minkowski.append(y_start)
     initial_spherical = conversion_formulas.form_bol_three_dimensional_vector(x_start, y_start, z_start, 0, 0, 1)
