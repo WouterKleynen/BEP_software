@@ -19,8 +19,7 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end):
     r_solver = U[:, 0]
     theta_solver = U[:, 1]
     phi_solver = U[:, 2]
-    x_end, y_end, z_end = conversion_formulas.spherical_to_cartesian(r_solver[-1], theta_solver[-1], phi_solver[-1])
-    return x_end, y_end
+    return r_solver, theta_solver, phi_solver
 
 
 def create_geodesic_field(dt, t_end):
@@ -39,13 +38,8 @@ def create_geodesic_field(dt, t_end):
             x_start_series_minkowski.append(x_start)
             y_start_series_minkowski.append(y_start)
             try:
-                initial_spherical = conversion_formulas.form_bol_three_dimensional_vector(x_start, y_start, z_start, 0,
-                                                                                          0, 1)
-                U = odeint(minkowski_numerical_solver.python_solver, initial_spherical, t)
-                r_solver        = U[:, 0]
-                theta_solver    = U[:, 1]
-                phi_solver      = U[:, 2]
-                X, Y, Z = conversion_formulas.spherical_to_cartesian(r_solver, theta_solver, phi_solver)
+                r, theta, phi = create_specified_geodesic(x_start, y_start, z_start, dt, t_end)
+                X, Y, Z = conversion_formulas.spherical_to_cartesian(r, theta, phi)
                 x_end_series_minkowski.append(X[-1])
                 y_end_series_minkowski.append(Y[-1])
                 ax.plot3D(X, Y, Z, 'blue')

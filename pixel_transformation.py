@@ -5,6 +5,7 @@ import time
 import matplotlib.pyplot as plt
 from shutil import copyfile
 import warnings
+import conversion_formulas
 
 # Numpy throws a RuntimeWarning when 0 is divided by 0 in the origin. We simply skip this value.
 warnings.filterwarnings("ignore", category=RuntimeWarning)
@@ -38,8 +39,10 @@ def create_transformed_image(input_path=test_input, output_path=test_output):
         for j in range(0, y):
             R, G, B = input_image[i][j]
             try:
-                pixel_x_end_float, pixel_y_end_float = minkowski_geodesic_construction.create_specified_geodesic(
+                r, theta, phi = minkowski_geodesic_construction.create_specified_geodesic(
                     i - x / 2.0, j - y / 2.0, -10, dt, t_end)
+                pixel_x_end_float, pixel_y_end_float, pixel_z_end_float = \
+                    conversion_formulas.spherical_to_cartesian(r[-1], theta[-1], phi[-1])
             except ZeroDivisionError:
                 continue
             pixel_x_end_int = round(pixel_x_end_float + x/2)
