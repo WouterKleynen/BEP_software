@@ -59,7 +59,7 @@ initial_sphere = [1, 1, 1, 1]
 # minkowski_geodesic_construction.create_photo(x_end, y_end, 'end photo Minkowski space')
 
 # Define r_s
-r_s = 10
+r_s = 5
 
 # define initial condtion for Schwarzschild metric
 initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
