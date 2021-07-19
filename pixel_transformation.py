@@ -26,37 +26,36 @@ def open_input_and_output_image(input_path=test_input, output_path=test_output):
     return input_image, output_image
 
 
-def whiten_output_image(output_image, output_path=test_output):
+def blacken_output_image(output_image, output_path=test_output):
     x = output_image.shape[0]
     y = output_image.shape[1]
     for i in range(0, x):
         for j in range(0, y):
-            output_image[i, j] = [255, 255, 255]
+            output_image[i, j] = [0, 0, 0]
     cv2.imwrite(output_path, output_image)
     return x, y, output_image
 
 
 def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_path=test_output):
     input_image, output_image = open_input_and_output_image()
-    x, y, output_image = whiten_output_image(output_image)
-    for i in range(0, x+1):
-        for j in range(0, y+1):
+    x, y, output_image = blacken_output_image(output_image)
+    for i in range(0, x):
+        for j in range(0, y):
             R, G, B = input_image[i][j]
-            print(i, j)
+            x_start = i - x / 2
+            y_start = j - y / 2
+            z_start = -10
             try:
                 r, theta, phi = minkowski_geodesic_construction.create_specified_geodesic(
-                    i - x / 2.0, j - y / 2.0, -10, dt, t_end)
-                pixel_x_end_float, pixel_y_end_float, pixel_z_end_float = \
+                    x_start, y_start, z_start, dt, t_end)
+                position_x_end_transposed, position_y_end_transposed, position_z_end_transposed = \
                     conversion_formulas.spherical_to_cartesian(r[-1], theta[-1], phi[-1])
+                position_x_end = round(position_x_end_transposed + x / 2)
+                position_y_end = round(position_y_end_transposed + y / 2)
+                output_image[position_x_end, position_y_end] = R, G, B
             except ZeroDivisionError:
+                # output_image[i, j] = [255, 255, 255]
                 continue
-            pixel_x_end_int = round(pixel_x_end_float + x/2)
-            pixel_y_end_int = round(pixel_y_end_float + y/2)
-            print(pixel_x_end_int, pixel_y_end_int)
-            print('')
-            output_image[pixel_x_end_int, pixel_y_end_int, 0] = R
-            output_image[pixel_x_end_int, pixel_y_end_int, 1] = G
-            output_image[pixel_x_end_int, pixel_y_end_int, 2] = B
             cv2.imshow('image', output_image)
             cv2.waitKey(1)
 
@@ -65,5 +64,53 @@ def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_
 
 def create_transformed_schwarzschild_image(dt, t_end, r_s, input_path=test_input, output_path=test_output):
     input_image, output_image = open_input_and_output_image()
-    x, y, output_image = whiten_output_image(output_image)
-    x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, x, r_s)
+    x_size, y_size, output_image = blacken_output_image(output_image)
+    for i in range(0, y_size):
+        for j in range(0, x_size):
+            x_start = round(i - x_size / 2)
+            y_start = round(j - y_size / 2)
+            z_start = -10
+            try:
+                results = schwarzschild_geodesic_construction.\
+                    create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s)
+                if results is not None:
+                    r, theta, phi = results
+                    position_x_end_transposed, position_y_end_transposed, position_z_end_transposed = \
+                        conversion_formulas.spherical_to_cartesian(r[-1], theta[-1], phi[-1])
+                    if (position_x_end_transposed < -x_size / 2 or position_x_end_transposed > x_size / 2) or (
+                            position_y_end_transposed < - y_size / 2 or position_y_end_transposed > y_size / 2):
+                        continue
+                    position_x_end = round(position_x_end_transposed + x_size / 2)
+                    position_y_end = round(position_y_end_transposed + y_size / 2)
+                    R, G, B = input_image[position_x_end][position_y_end]
+                else:
+                    # print('The solver returned None') -> r < r_s
+                    continue
+            except ZeroDivisionError:
+                # print('Zero division error') -> origin
+                output_image[x_start, y_start] = [255, 255, 255]
+                continue
+            output_image[i, j] = R, G, B
+            cv2.imshow('image', output_image)
+            cv2.waitKey(1)
+    # For some reason the solver skips the first geodesic, (I have no idea why), this calculates it specifially agai
+    r, theta, phi = schwarzschild_geodesic_construction.create_specified_geodesic(x_size / 2, y_size / 2, -10, dt, t_end, r_s)
+    X, Y, Z = conversion_formulas.spherical_to_cartesian(r, theta, phi)
+    x_end_series_schwarzschild.append(X[-1])
+    y_end_series_schwarzschild.append(Y[-1])
+    R, G, B = input_image[round(X[-1])][round(Y[-1])]
+    output_image[round(x_size / 2), round(y_size / 2)] = R, G, B
+    cv2.imshow('image', output_image)
+    cv2.waitKey(1)
+    cv2.imwrite(output_path, output_image)
+    cv2.imshow('image window', output_image)
+    # add wait key. window waits until user presses a key
+    cv2.waitKey(0)
+
+
+
+
+
+
+
+

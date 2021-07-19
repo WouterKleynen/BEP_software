@@ -59,7 +59,6 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
             except ZeroDivisionError:
                 # print('Zero division error') -> origin
                 continue
-    ###########################################################################
     # For some reason the solver skips the first geodesic, (I have no idea why), this calculates it specifially agai
     r, theta, phi = create_specified_geodesic(field_size / 2, field_size / 2, -10, dt, t_end, r_s)
     X, Y, Z = ccs.spherical_to_cartesian(r, theta, phi)
@@ -67,7 +66,6 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
     y_end_series_schwarzschild.append(Y[-1])
     if plot:
         ax.plot3D(X, Y, Z, 'blue')
-        ###########################################################################
         ax.title.set_text('r_s = ' + str(r_s) + ', t = ' + str(t_end))
         plt.show()
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild

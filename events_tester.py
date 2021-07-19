@@ -13,7 +13,7 @@ def event(t, u, r_s):
 # Stop if u[1] < r_s
 def event2(t, u, r_s):
     event2.terminal = True
-    return u[1] - r_s
+    return u[1] + 0.01 - r_s
 
 
 def fun3(t, variables, r_s):
