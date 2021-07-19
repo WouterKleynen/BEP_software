@@ -22,30 +22,33 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end):
     return r_solver, theta_solver, phi_solver
 
 
-def create_geodesic_field(dt, field_size, t_end):
-    fig = plt.figure()
-
-    ax = plt.axes(projection='3d')
-    ax.set_zlim3d(-12, 12)
+def create_geodesic_field(dt, field_size, t_end, plot=False):
+    if plot:
+        fig = plt.figure()
+        ax = plt.axes(projection='3d')
 
     t = np.arange(0, t_end, dt)  # create array for t
 
-    for i in range(0, field_size + 1):
-        for j in range(0, field_size + 1):
-            x_start = 10 - i
-            y_start = 10 - j
+    for i in range(0, field_size+1):
+        for j in range(0, field_size+1):
+            x_start = field_size/2 - i
+            y_start = field_size/2 - j
             z_start = -10
             x_start_series_minkowski.append(x_start)
             y_start_series_minkowski.append(y_start)
+            print('x start = ' + str(x_start), 'y start = ' + str(y_start), 'z start = ' + str(z_start))
             try:
                 r, theta, phi = create_specified_geodesic(x_start, y_start, z_start, dt, t_end)
                 X, Y, Z = conversion_formulas.spherical_to_cartesian(r, theta, phi)
+                print('x end = ' + str(X[-1]), 'y end = ' + str(Y[-1]), 'z end = ' + str(Z[-1]))
                 x_end_series_minkowski.append(X[-1])
                 y_end_series_minkowski.append(Y[-1])
-                ax.plot3D(X, Y, Z, 'blue')
+                if plot:
+                    ax.plot3D(X, Y, Z, 'blue')
             except ZeroDivisionError:
                 continue
-    plt.show()
+    if plot:
+        plt.show()
     return x_start_series_minkowski, y_start_series_minkowski, x_end_series_minkowski, y_end_series_minkowski
 
 

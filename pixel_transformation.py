@@ -12,6 +12,11 @@ warnings.filterwarnings("ignore", category=RuntimeWarning)
 test_input = 'input_transformable_images//100x100_car.jpg'
 test_output = 'output_transformable_images//100x100_car.jpg'
 
+x_start_series_schwarzschild = []
+y_start_series_schwarzschild = []
+x_end_series_schwarzschild = []
+y_end_series_schwarzschild = []
+
 
 def open_input_and_output_image(input_path=test_input, output_path=test_output):
     copyfile(test_input, test_output)
@@ -34,9 +39,10 @@ def whiten_output_image(output_image, output_path=test_output):
 def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_path=test_output):
     input_image, output_image = open_input_and_output_image()
     x, y, output_image = whiten_output_image(output_image)
-    for i in range(0, x):
-        for j in range(0, y):
+    for i in range(0, x+1):
+        for j in range(0, y+1):
             R, G, B = input_image[i][j]
+            print(i, j)
             try:
                 r, theta, phi = minkowski_geodesic_construction.create_specified_geodesic(
                     i - x / 2.0, j - y / 2.0, -10, dt, t_end)
@@ -46,7 +52,8 @@ def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_
                 continue
             pixel_x_end_int = round(pixel_x_end_float + x/2)
             pixel_y_end_int = round(pixel_y_end_float + y/2)
-    
+            print(pixel_x_end_int, pixel_y_end_int)
+            print('')
             output_image[pixel_x_end_int, pixel_y_end_int, 0] = R
             output_image[pixel_x_end_int, pixel_y_end_int, 1] = G
             output_image[pixel_x_end_int, pixel_y_end_int, 2] = B
@@ -55,4 +62,8 @@ def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_
 
     cv2.imwrite(output_path, output_image)
 
-# def create_transformed_schwarzschild_image(dt, t_end, input_path=test_input, output_path=test_output):
+
+def create_transformed_schwarzschild_image(dt, t_end, r_s, input_path=test_input, output_path=test_output):
+    input_image, output_image = open_input_and_output_image()
+    x, y, output_image = whiten_output_image(output_image)
+    x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, x, r_s)
