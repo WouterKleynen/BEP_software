@@ -1,27 +1,35 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import cv2
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 
-# Read the image with Opencv
-img = cv2.imread('input_image')
-# Change the color from BGR to RGB
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-# Orgird to store data
-x, y = np.ogrid[0:img.shape[0], 0:img.shape[1]]
-# In Python3 matplotlib assumes rgbdata in range 0.0 to 1.0
-img = img.astype('float32')/255
-fig = plt.Figure()
-# gca do not work thus use figure objects inbuilt function.
-ax = fig.add_subplot(projection='3d')
+def plot(r_s):
+    xx, yy = np.meshgrid(np.linspace(-10, 10, 600), np.linspace(-10, 10, 600))
+    zz, yz = np.meshgrid(np.linspace(0, 0, 600), np.linspace(0, 0, 600))
 
-# Plot data
-ax.plot_surface(x-50, y-50, np.atleast_2d(0)-10, rstride=10, cstride=10, facecolors=img, label="TEST")
-ax.plot_surface(x-50, y-50, np.atleast_2d(0)+10, rstride=10, cstride=10, facecolors=img, label="NO")
+    # create vertices for a rotated mesh (3D rotation matrix)
+    X_low = xx
+    Y_low = yy
+    Z_low = -10 + zz
 
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
+    X_high = xx
+    Y_high = yy
+    Z_high = 10 + zz
+    # # create the figure
+    fig = plt.figure()
 
-fig.savefig('output_image')
+    u = np.linspace(0, 2 * np.pi, 100)
+    v = np.linspace(0, np.pi, 100)
+
+    x = r_s * np.outer(np.cos(u), np.sin(v))
+    y = r_s * np.outer(np.sin(u), np.sin(v))
+    z = r_s * np.outer(np.ones(np.size(u)), np.cos(v))
+
+
+    # show the 3D rotated projection
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot_surface(X_low, Y_low, Z_low, rstride=1, cstride=1, facecolors=plt.imread('input_transformable_images//600x600_space.jpg')/255., shade=False)
+    ax.plot_surface(X_high, Y_high, Z_high, rstride=1, cstride=1, facecolors=plt.imread('input_transformable_images//600x600_space.jpg')/255., shade=False)
+    ax.plot_surface(x, y, z, rstride=4, cstride=4, color='k', linewidth=0, alpha=0.5)
+    plt.show()
 

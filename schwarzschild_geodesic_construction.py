@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import conversion_formulas as ccs
-import events_tester
+import solver_with_events
 import warnings
 
 warnings.filterwarnings("error")
@@ -15,7 +15,7 @@ y_end_series_schwarzschild = []
 def create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s):
     t = np.arange(0, t_end, dt)
     initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
-    V = events_tester.python_solver_with_termination(t, t_end, initial_schwarzschild, r_s)
+    V = solver_with_events.python_solver_with_termination(t, t_end, initial_schwarzschild, r_s)
     if V is not None:
         r_solver = V[1]
         theta_solver = V[2]
@@ -32,10 +32,10 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
 
     t = np.arange(0, t_end, dt)  # create array for t
 
-    for i in range(0, field_size + 1):
-        for j in range(0, field_size + 1):
-            x_start = field_size / 2 - i
-            y_start = field_size / 2 - j
+    for x in range(0, field_size + 1):
+        for y in range(0, field_size + 1):
+            x_start = field_size / 2 - x
+            y_start = field_size / 2 - y
             z_start = -10
             x_start_series_schwarzschild.append(x_start)
             y_start_series_schwarzschild.append(y_start)

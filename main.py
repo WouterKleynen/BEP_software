@@ -10,6 +10,7 @@ import plotter
 import minkowski_geodesic_construction
 import schwarzschild_numerical_solver
 import pixel_transformation
+import comparison_transformation_image
 
 # define dt, t and r
 dt = 0.05                     # define dt
@@ -37,7 +38,7 @@ initial_sphere = [1, 1, 1, 1]
 # plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_solver, phi_solver, "3D plot by using a python solver for the sphere")
 
 # define initial condtion for Minkowski space to get an impression of the geodesics
-# initial_minkowksi = [1, 1, 1, 1, 1, 1]
+initial_minkowksi = [1, 1, 1, 1, 1, 1]
 
 # Eulers method for Minkowski space
 # r_numerical, theta_numerical, phi_numerical, v_1_numerical, v_2_numerical, v_3_numerical = minkowski_numerical_solver.euler_method(initial, n, dt)
@@ -59,7 +60,7 @@ initial_sphere = [1, 1, 1, 1]
 # minkowski_geodesic_construction.create_photo(x_end, y_end, 'end photo Minkowski space')
 
 # Define r_s
-r_s = 5
+r_s = 3
 
 # define initial condtion for Schwarzschild metric
 initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
@@ -84,6 +85,8 @@ t_end = 40
 # schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
 # schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
 
-pixel_transformation.create_transformed_schwarzschild_image(dt, t_end, r_s)
+# pixel_transformation.create_transformed_schwarzschild_image(dt, t_end, r_s)
+# print(schwarzschild_geodesic_construction.create_specified_geodesic(-3.0, 78.0, -10, 0.05, 40, 80))
 
+comparison_transformation_image.plot(r_s)
 
