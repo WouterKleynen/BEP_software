@@ -8,8 +8,8 @@ import conversion_formulas
 # Numpy throws a RuntimeWarning when 0 is divided by 0 in the origin. We simply skip this value.
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-test_input = 'input_transformable_images//600x600_space.jpg'
-test_output = 'output_transformable_images//600x600_space.jpg'
+test_input = 'input_transformable_images//100x100_car.jpg'
+test_output = 'output_transformable_images//100x100_car.jpg'
 
 x_start_series_schwarzschild = []
 y_start_series_schwarzschild = []
@@ -49,7 +49,7 @@ def create_transformed_minkowski_image(dt, t_end, input_path=test_input, output_
                     conversion_formulas.spherical_to_cartesian(r[-1], theta[-1], phi[-1])
                 position_x_end = round(position_x_end_transposed + x_size / 2)
                 position_y_end = round(-position_y_end_transposed + y_size / 2)
-                R, G, B = input_image[position_x_end][position_y_end]
+                R, G, B = input_image[position_y_end][position_x_end]
             except ZeroDivisionError:
                 continue
             # CV2 apparently reverses the order of row and columns which is super weird but ok
@@ -69,7 +69,7 @@ def create_transformed_schwarzschild_image(dt, t_end, r_s, input_path=test_input
             y_start = y_size / 2 - y
             z_start = -10
             try:
-                print(x_start, y_start, z_start, dt, t_end, r_s)
+                # print(x_start, y_start, z_start, dt, t_end, r_s)
                 results = schwarzschild_geodesic_construction.\
                     create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s)
                 if results is not None:
@@ -81,14 +81,14 @@ def create_transformed_schwarzschild_image(dt, t_end, r_s, input_path=test_input
                         continue
                     position_x_end = round(position_x_end_transposed + x_size / 2)
                     position_y_end = round(-position_y_end_transposed + y_size / 2)
-                    R, G, B = input_image[position_x_end][position_y_end]
+                    # CV2 apparently reverses the order of row and columns which is super weird but ok
+                    R, G, B = input_image[position_y_end][position_x_end]
                 else:
                     # print('The solver returned None') -> r < r_s
                     continue
             except ZeroDivisionError:
                 # print('Zero division error') -> origin
                 continue
-            # CV2 apparently reverses the order of row and columns which is super weird but ok
             output_image[y, x] = R, G, B
             cv2.imshow('image', output_image)
             cv2.waitKey(1)

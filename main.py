@@ -60,7 +60,7 @@ initial_minkowksi = [1, 1, 1, 1, 1, 1]
 # minkowski_geodesic_construction.create_photo(x_end, y_end, 'end photo Minkowski space')
 
 # Define r_s
-r_s = 3
+r_s = 5
 
 # define initial condtion for Schwarzschild metric
 initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
@@ -85,8 +85,8 @@ t_end = 40
 # schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
 # schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
 
-# pixel_transformation.create_transformed_schwarzschild_image(dt, t_end, r_s)
+pixel_transformation.create_transformed_schwarzschild_image(dt, t_end, r_s)
 # print(schwarzschild_geodesic_construction.create_specified_geodesic(-3.0, 78.0, -10, 0.05, 40, 80))
 
-comparison_transformation_image.plot(r_s)
+# comparison_transformation_image.plot(r_s)
 

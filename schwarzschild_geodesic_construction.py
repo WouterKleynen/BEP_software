@@ -53,6 +53,9 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
                     y_end_series_schwarzschild.append(Y[-1])
                     if plot:
                         ax.plot3D(X, Y, Z, 'blue')
+                        ax.set_xlabel('X')
+                        ax.set_ylabel('Y')
+                        ax.set_zlabel('Z')
                 else:
                     # print('The solver returned None') -> r < r_s
                     continue

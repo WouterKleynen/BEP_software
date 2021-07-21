@@ -31,5 +31,8 @@ def plot(r_s):
     ax.plot_surface(X_low, Y_low, Z_low, rstride=1, cstride=1, facecolors=plt.imread('input_transformable_images//600x600_space.jpg')/255., shade=False)
     ax.plot_surface(X_high, Y_high, Z_high, rstride=1, cstride=1, facecolors=plt.imread('input_transformable_images//600x600_space.jpg')/255., shade=False)
     ax.plot_surface(x, y, z, rstride=4, cstride=4, color='k', linewidth=0, alpha=0.5)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
     plt.show()
 

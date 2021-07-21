@@ -7,6 +7,8 @@ def plot_trajectories(t, r, theta, phi, text):
     plt.plot(t, r * np.cos(theta), label="Z = r*cos(theta)")  # plot Z
     plt.plot(t, r * np.sin(theta) * np.sin(phi % (2 * np.pi)), label="Y = r*sin(theta)sin(phi)")  # plot Y
     plt.plot(t, r * np.sin(theta) * np.cos(phi % (2 * np.pi)), label="X = r*sin(theta)cos(phi)")  # plot X
+    plt.xlabel("X")
+    plt.ylabel("Y")
     plt.legend()
     plt.title(text)
     plt.show()
@@ -15,6 +17,8 @@ def plot_trajectories(t, r, theta, phi, text):
 def plot_phi_to_theta(phi, theta, title):
     plt.plot(phi % (2 * np.pi), theta, label="phi")  # plot Z
     plt.title("phi plotted to theta " + title)
+    plt.xlabel("X")
+    plt.ylabel("Y")
     plt.show()
 
 
@@ -22,6 +26,9 @@ def plot_point_in_three_dimension(X, Y, Z):
     fig = plt.figure(figsize=(4, 4))
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(X, Y, Z)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
     plt.show()
 
 
@@ -32,6 +39,9 @@ def plot_three_dimensional_spherical(r, theta, phi, text):
     x, y, z = cf.spherical_to_cartesian(r, theta, phi)
     ax.plot(x, y, z, 'r', lw=2)
     plt.title(text)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
     plt.show()
 
 
@@ -46,6 +56,9 @@ def plot_three_dimensional_spherical_with_starting_point(r, theta, phi):
     x = r * np.sin(theta) * np.cos(phi % (2 * np.pi))
 
     ax.plot(x, y, z, 'r', lw=2)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
     plt.show()
 
 
@@ -68,6 +81,9 @@ def plot_three_dimensional_spherical_with_unit_sphere(r, theta, phi, text):
     x = np.sin(theta) * np.cos(phi % (2 * np.pi))
 
     ax.plot(x, y, z, 'r', lw=2)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
     plt.title(text)
     plt.show()
 

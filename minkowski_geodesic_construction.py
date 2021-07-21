@@ -45,6 +45,9 @@ def create_geodesic_field(dt, field_size, t_end, plot=False):
                 y_end_series_minkowski.append(Y[-1])
                 if plot:
                     ax.plot3D(X, Y, Z, 'blue')
+                    ax.set_xlabel('X')
+                    ax.set_ylabel('Y')
+                    ax.set_zlabel('Z')
             except ZeroDivisionError:
                 continue
     if plot:

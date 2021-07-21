@@ -5,21 +5,19 @@ import time
 
 
 # Stop at Z > 10
-def event_reach_Z_10(t, u, r_s, time_start):
+def event_reach_Z_10(t, u, r_s):
     event_reach_Z_10.terminal = True
     X, Y, Z = conversion_formulas.spherical_to_cartesian(u[1], u[2], u[3])
     return Z - 10.0
 
 
 # Stop if u[1] < r_s
-def event_reach_schwarzschild_radius(t, u, r_s, time_start):
+def event_reach_schwarzschild_radius(t, u, r_s):
     event_reach_schwarzschild_radius.terminal = True
-    if u[1] - 0.005 < r_s:
-        print(True)
     return u[1] - 0.005 - r_s
 
 
-def fun3(t, variables, r_s, time_start):
+def fun3(t, variables, r_s):
     t, r, theta, phi, v_zero, v_one, v_two, v_three = variables
     d_v_zero = - r_s / (r * (r - r_s)) * v_zero * v_one
     d_v_one = - (r_s * (r - r_s) / (2.0 * r ** 3)) * v_zero ** 2 + (r_s / (2 * r * (r - r_s))) * v_one ** 2 + \
@@ -34,7 +32,7 @@ def fun3(t, variables, r_s, time_start):
 
 
 def python_solver_with_termination(t, tend, V, r_s):
-    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='Radau', events=(event_reach_Z_10, event_reach_schwarzschild_radius), args=(r_s,), t_eval=t)
+    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='RK45', events=(event_reach_Z_10, event_reach_schwarzschild_radius), args=(r_s,), t_eval=t)
     if sol.status == 1:
         if len(sol.t_events[0]) > 0:
             # print('Z = 10 was reached')
