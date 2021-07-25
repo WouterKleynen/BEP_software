@@ -11,12 +11,6 @@ def event_reach_Z_10(t, u, r_s):
     return Z - 10.0
 
 
-# Stop if u[1] < r_s
-def event_reach_schwarzschild_radius(t, u, r_s):
-    event_reach_schwarzschild_radius.terminal = True
-    return u[1] - 0.005 - r_s
-
-
 def fun3(t, variables, r_s):
     t, r, theta, phi, v_zero, v_one, v_two, v_three = variables
     d_v_zero = - r_s / (r * (r - r_s)) * v_zero * v_one
@@ -32,14 +26,11 @@ def fun3(t, variables, r_s):
 
 
 def python_solver_with_termination(t, tend, V, r_s):
-    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='RK45', events=(event_reach_Z_10, event_reach_schwarzschild_radius), args=(r_s,), t_eval=t)
+    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='RK45', events=event_reach_Z_10, args=(r_s,), t_eval=t)
     if sol.status == 1:
         if len(sol.t_events[0]) > 0:
             # print('Z = 10 was reached')
             return sol.y
-        if len(sol.t_events[1]) > 0:
-            # print('Fell within singularity')
-            return None
     elif sol.status == 0:
         return None
         # print('Z = 10 was NOT reached, but the proces was finised')

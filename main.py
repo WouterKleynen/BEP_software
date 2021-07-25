@@ -13,7 +13,7 @@ import pixel_transformation
 import comparison_transformation_image
 
 # define dt, t and r
-dt = 0.05                     # define dt
+dt = 0.005                     # define dt
 t_end = 6                      # t end value
 t = np.arange(0, t_end, dt)    # create array for t
 n = len(t)                     # define n for loop
@@ -24,18 +24,18 @@ initial_sphere = [1, 1, 1, 1]
 
 # Eulers method for the sphere
 # theta_numerical, phi_numerical, v_1_numerical, v_2_numerical = sphere_numerical_solver.euler_method(initial_sphere, n, dt)
-# plotter.plot_phi_to_theta(phi_numerical, theta_numerical, "by using eulers method for the sphere")
-# plotter.plot_trajectories(t, r, theta_numerical, phi_numerical, "trajectories by using eulers method for the sphere")
-# plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_numerical, phi_numerical, "3D plot by using eulers method for the sphere")
+# plotter.plot_phi_to_theta(phi_numerical, theta_numerical, "by using eulers method for the unit sphere")
+# plotter.plot_trajectories(t, r, theta_numerical, phi_numerical, "trajectories by using eulers method for the unit sphere")
+# plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_numerical, phi_numerical, "geodesic plot by using eulers method for the unit sphere")
 
 # Python solver for the sphere
-# solver_output = odeint(sphere_numerical_solver.python_solver, initial_sphere, t)
+# U = odeint(sphere_numerical_solver.python_solver_INT, initial_sphere, t)
 # sol = solve_ivp(sphere_numerical_solver.python_solver_IPV, (0, t_end), initial_sphere, method='LSODA', t_eval=t)
-# print(theta_solver)
-# phi_solver     = solver_output[:, 3]
+# theta_solver   = U[:, 2]
+# phi_solver     = U[:, 3]
 # plotter.plot_phi_to_theta(phi_solver, theta_solver, "by using a python solver for the sphere")
 # plotter.plot_trajectories(t, r, theta_solver, phi_solver, "trajectories by using a pyhton solver for the sphere")
-# plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_solver, phi_solver, "3D plot by using a python solver for the sphere")
+# plotter.plot_three_dimensional_spherical_with_unit_sphere(r, theta_solver, phi_solver, "geodesic plot by using a python solver for the sphere")
 
 # define initial condtion for Minkowski space to get an impression of the geodesics
 initial_minkowksi = [1, 1, 1, 1, 1, 1]
@@ -60,7 +60,7 @@ initial_minkowksi = [1, 1, 1, 1, 1, 1]
 # minkowski_geodesic_construction.create_photo(x_end, y_end, 'end photo Minkowski space')
 
 # Define r_s
-r_s = 5
+r_s = 0.4
 
 # define initial condtion for Schwarzschild metric
 initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
@@ -85,8 +85,10 @@ t_end = 40
 # schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
 # schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
 
-pixel_transformation.create_transformed_schwarzschild_image(dt, t_end, r_s)
-# print(schwarzschild_geodesic_construction.create_specified_geodesic(-3.0, 78.0, -10, 0.05, 40, 80))
+input_path = 'input_transformable_images//100x100_car.jpg'
+output_path = 'output_transformable_images//100x100_car.jpg'
+# x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)
+# comparison_transformation_image.plot(input_path, output_path, r_s, 100)
 
-# comparison_transformation_image.plot(r_s)
-
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, 30, r_s, plot=True)
+pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)

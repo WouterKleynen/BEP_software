@@ -25,7 +25,7 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s):
         return None
 
 
-def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin=False):
+def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
     if plot:
         fig = plt.figure()
         ax = plt.axes(projection='3d')
@@ -39,23 +39,22 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
             z_start = -10
             x_start_series_schwarzschild.append(x_start)
             y_start_series_schwarzschild.append(y_start)
-            print('x start = ' + str(x_start), 'y start = ' + str(y_start), 'z start = ' + str(z_start))
+            # print('x start = ' + str(x_start), 'y start = ' + str(y_start), 'z start = ' + str(z_start))
             try:
                 results = create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s)
                 if results is not None:
                     r, theta, phi = results
                     X, Y, Z = ccs.spherical_to_cartesian(r, theta, phi)
-                    print('x end = ' + str(X[-1]), 'y end = ' + str(Y[-1]), 'z end = ' + str(Z[-1]))
+                    # print('x end = ' + str(X[-1]), 'y end = ' + str(Y[-1]), 'z end = ' + str(Z[-1]))
                     if (X[-1] < -field_size / 2 or X[-1] > field_size / 2) or (
                             Y[-1] < -field_size / 2 or Y[-1] > field_size / 2):
                         continue
                     x_end_series_schwarzschild.append(X[-1])
                     y_end_series_schwarzschild.append(Y[-1])
+                    x_dif = abs(x_start - X[-1])
+                    y_dif = abs(y_start - Y[-1])
                     if plot:
                         ax.plot3D(X, Y, Z, 'blue')
-                        ax.set_xlabel('X')
-                        ax.set_ylabel('Y')
-                        ax.set_zlabel('Z')
                 else:
                     # print('The solver returned None') -> r < r_s
                     continue
@@ -71,7 +70,11 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False, around_origin
         ax.plot3D(X, Y, Z, 'blue')
         ax.title.set_text('r_s = ' + str(r_s) + ', t = ' + str(t_end))
         plt.show()
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
+
 
 
 # create X Y scattered plot
