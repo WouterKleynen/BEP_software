@@ -20,7 +20,7 @@ n = len(t)                     # define n for loop
 r = 1                          # unit sphere
 
 # define initial condtion for the sphere: theta, phi, velocity_theta, velocity_phi
-initial_sphere = [1, 1, 1, 1]
+initial_sphere = [4, 4, 4, 4]
 
 # Eulers method for the sphere
 # theta_numerical, phi_numerical, v_1_numerical, v_2_numerical = sphere_numerical_solver.euler_method(initial_sphere, n, dt)
@@ -50,14 +50,19 @@ initial_minkowksi = [1, 1, 1, 1, 1, 1]
 # r_solver       = U[:, 0]
 # theta_solver   = U[:, 1]
 # phi_solver     = U[:, 2]
-# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories by using a python solver for Minkowski space")
-# plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Minkowksi space")
+# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodesic by using a python solver for Minkowski space")
+# plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot of the geodesic by using a python solver for Minkowksi space")
 
 # Plot the geodesics of the Minkowski space
 # t_end = 20  # increase t to make sure the rays go from Z = -10 to Z = 10
-# x_start, y_start, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, 6, t_end, True)
-# minkowski_geodesic_construction.create_photo(x_start, y_start, 'start photo Minkowski space')
-# minkowski_geodesic_construction.create_photo(x_end, y_end, 'end photo Minkowski space')
+# x_start, y_start, x_end, y_end = minkowski_geodesic_construction.create_geodesic_field(dt, 6, t_end)
+# minkowski_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Minkowski space')
+# minkowski_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Minkowski space')
+
+# input_path = 'input_transformable_images//100x100_car.jpg'
+# output_path = 'output_transformable_images//100x100_car_output.jpg'
+
+# pixel_transformation.create_transformed_minkowski_image(dt, t_end, input_path, output_path)
 
 # Define r_s
 r_s = 0.4
@@ -77,18 +82,26 @@ t_end = 40
 # r_solver       = U[:, 1]
 # theta_solver   = U[:, 2]
 # phi_solver     = U[:, 3]
-# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories by using a python solver for Schwarzschild geodesic")
+# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Schwarzschild geodesic")
 
 # Plot the geodesics of the Schwarzschild space
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, 6, r_s, True)
-# schwarzschild_geodesic_construction.create_photo(x_start, y_start, 'start field Schwarzschild at Z = -10')
-# schwarzschild_geodesic_construction.create_photo(x_end, y_end, 'end field Schwarzschild at Z = 10')
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 11, 6, r_s, True)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 13, 6, r_s, True)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 15, 6, r_s, True)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 17, 6, r_s, True)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 20, 6, r_s, True)
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, 6, r_s, True)
 
-input_path = 'input_transformable_images//100x100_car.jpg'
-output_path = 'output_transformable_images//100x100_car.jpg'
-# x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)
-# comparison_transformation_image.plot(input_path, output_path, r_s, 100)
+# schwarzschild_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Schwarzschild')
+# schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
+
+input_path = 'input_transformable_images//600x600_space.jpg'
+
+x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s)
+# comparison_transformation_image.plot(input_path, output_path, r_s, x_size, y_size)
+# comparison_transformation_image.plot(input_path, output_path, 100)
 
 # schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, 30, r_s, plot=True)
-pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)
+# pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)
+

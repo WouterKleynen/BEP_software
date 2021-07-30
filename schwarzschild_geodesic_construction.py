@@ -51,10 +51,11 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
                         continue
                     x_end_series_schwarzschild.append(X[-1])
                     y_end_series_schwarzschild.append(Y[-1])
-                    x_dif = abs(x_start - X[-1])
-                    y_dif = abs(y_start - Y[-1])
                     if plot:
                         ax.plot3D(X, Y, Z, 'blue')
+                        ax.set_xlabel('X')
+                        ax.set_ylabel('Y')
+                        ax.set_zlabel('Z')
                 else:
                     # print('The solver returned None') -> r < r_s
                     continue
@@ -76,9 +77,8 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
     return x_start_series_schwarzschild, y_start_series_schwarzschild, x_end_series_schwarzschild, y_end_series_schwarzschild
 
 
-
 # create X Y scattered plot
-def create_photo(x_series, y_series, plot_title):
+def create_scatter(x_series, y_series, plot_title):
     plt.scatter(x_series, y_series)
     plt.title(plot_title)
     plt.show()

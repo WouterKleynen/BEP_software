@@ -4,9 +4,9 @@ import conversion_formulas as cf
 
 
 def plot_trajectories(t, r, theta, phi, text):
-    plt.plot(t, r * np.cos(theta), label="Z = cos(theta)")  # plot Z
-    plt.plot(t, r * np.sin(theta) * np.sin(phi % (2 * np.pi)), label="Y = sin(theta)sin(phi)")  # plot Y
-    plt.plot(t, r * np.sin(theta) * np.cos(phi % (2 * np.pi)), label="X = sin(theta)cos(phi)")  # plot X
+    plt.plot(t, r * np.cos(theta), label="Z = r*cos(theta)")  # plot Z
+    plt.plot(t, r * np.sin(theta) * np.sin(phi % (2 * np.pi)), label="Y = r*sin(theta)sin(phi)")  # plot Y
+    plt.plot(t, r * np.sin(theta) * np.cos(phi % (2 * np.pi)), label="X = r*sin(theta)cos(phi)")  # plot X
     plt.xlabel('t')
     plt.legend()
     plt.title(text)

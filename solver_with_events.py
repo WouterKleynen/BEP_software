@@ -8,7 +8,14 @@ import time
 def event_reach_Z_10(t, u, r_s):
     event_reach_Z_10.terminal = True
     X, Y, Z = conversion_formulas.spherical_to_cartesian(u[1], u[2], u[3])
-    return Z - 10.0
+    return Z - 10
+
+
+def event_fall_within_r_s(t, u, r_s):
+    event_fall_within_r_s.terminal = True
+    if u[1] < r_s:
+        print('Yeet')
+    return r_s - u[1]
 
 
 def fun3(t, variables, r_s):
@@ -26,15 +33,16 @@ def fun3(t, variables, r_s):
 
 
 def python_solver_with_termination(t, tend, V, r_s):
-    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='RK45', events=event_reach_Z_10, args=(r_s,), t_eval=t)
+    sol = solve_ivp(fun3, (0.0, 2*tend), V, method='RK45', events=(event_fall_within_r_s, event_reach_Z_10), args=(r_s,), t_eval=t)
     if sol.status == 1:
         if len(sol.t_events[0]) > 0:
-            # print('Z = 10 was reached')
             return sol.y
-    elif sol.status == 0:
+        if len(sol.t_events[1]) > 0:
+            return sol.y
+    if sol.status == 0:
         return None
         # print('Z = 10 was NOT reached, but the proces was finised')
-        # return sol.y # -> Toggle this on to see all geodesics including lost ones
+    # return sol.y # -> Toggle this on to see all geodesics including lost ones
 
 
 

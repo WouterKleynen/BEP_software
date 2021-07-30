@@ -3,9 +3,9 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 
-def plot(input_path, output_path, r_s, pic_size):
-    xx, yy = np.meshgrid(np.linspace(-10, 10, 100), np.linspace(-10, 10, 100))
-    zz, yz = np.meshgrid(np.linspace(0, 0, 100), np.linspace(0, 0, 100))
+def plot(input_path, output_path, r_s, x_size, y_size):
+    xx, yy = np.meshgrid(np.linspace(-10, 10, x_size), np.linspace(10, -10, y_size))
+    zz, yz = np.meshgrid(np.linspace(0, 0, x_size), np.linspace(0, 0, y_size))
 
     # create vertices for a rotated mesh (3D rotation matrix)
     X_low = xx
