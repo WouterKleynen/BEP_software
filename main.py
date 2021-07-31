@@ -96,9 +96,9 @@ t_end = 40
 # schwarzschild_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Schwarzschild')
 # schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
 
-input_path = 'input_transformable_images//nebula.jpg'
+input_path = 'input_transformable_images//100x100_car.jpg'
 
-x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s)
+x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
 # comparison_transformation_image.plot(input_path, output_path, r_s, x_size, y_size)
 # comparison_transformation_image.plot(input_path, output_path, 100)
 

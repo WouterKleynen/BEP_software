@@ -12,10 +12,10 @@ x_end_series_schwarzschild = []
 y_end_series_schwarzschild = []
 
 
-def create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s):
+def create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s, Z_end):
     t = np.arange(0, t_end, dt)
     initial_schwarzschild = ccs.form_bol_four_dimensional_vector(x_start, y_start, z_start, 0, 0, 1, r_s)
-    V = solver_with_events.python_solver_with_termination(t, t_end, initial_schwarzschild, r_s)
+    V = solver_with_events.python_solver_with_termination(t, t_end, initial_schwarzschild, r_s, Z_end)
     if V is not None:
         r_solver = V[1]
         theta_solver = V[2]
