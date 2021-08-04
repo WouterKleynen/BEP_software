@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+import os.path
 
 
-def plot(input_path, output_path, r_s, x_size, y_size):
-    xx, yy = np.meshgrid(np.linspace(-10, 10, x_size), np.linspace(10, -10, y_size))
-    zz, yz = np.meshgrid(np.linspace(0, 0, x_size), np.linspace(0, 0, y_size))
+def plot(input_path, output_path, r_s, x_size, Z_end):
+    xx, yy = np.meshgrid(np.linspace(-10, 10, x_size), np.linspace(10, -10, x_size))
+    zz, yz = np.meshgrid(np.linspace(0, 0, x_size), np.linspace(0, 0, x_size))
 
     # create vertices for a rotated mesh (3D rotation matrix)
     X_low = xx
@@ -14,7 +15,7 @@ def plot(input_path, output_path, r_s, x_size, y_size):
 
     X_high = xx
     Y_high = yy
-    Z_high = 10 + zz
+    Z_high = Z_end+ zz
     # # create the figure
     fig = plt.figure()
 
@@ -32,5 +33,10 @@ def plot(input_path, output_path, r_s, x_size, y_size):
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
+
+    title = output_path.split("//", 1)
+    extension = os.path.splitext(input_path)[1]
+    comparison_path = 'comparison_images//' + title[1] + str(extension), '_transformed' + '_r_s='+str(r_s) + '_Z_end=' + str(Z_end)+ str(extension)
     plt.show()
+    plt.savefig(comparison_path)
 

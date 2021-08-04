@@ -96,12 +96,35 @@ t_end = 40
 # schwarzschild_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Schwarzschild')
 # schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
 
-input_path = 'input_transformable_images//100x100_car.jpg'
+# input_path = 'input_transformable_images//100x100_car.jpg'
+# r_s = 0.4
+# Z_end = 10
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# comparison_transformation_image.plot(input_path, output_path, r_s, x_size, Z_end)
 
-x_size, y_size = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
-# comparison_transformation_image.plot(input_path, output_path, r_s, x_size, y_size)
-# comparison_transformation_image.plot(input_path, output_path, 100)
-
-# schwarzschild_geodesic_construction.create_geodesics_field(dt, t_end, 30, r_s, plot=True)
-# pixel_transformation.create_transformed_schwarzschild_image(input_path, output_path, dt, t_end, r_s)
+# input_path = 'input_transformable_images//blue_space.jpg'
+# r_s = 0.3
+# Z_end = 30
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# comparison_transformation_image.plot(cropped_input_path, output_path, r_s, x_size, Z_end)
+#
+# cropped_input_path = 'input_transformable_images//600x600_space_cropped.jpg'
+# output_path = 'output_transformable_images//600x600_space_transformed_r_s=0.55_Z_end=20_made_into_sphere.jpg'
+# r_s = 0.8
+# Z_end = 20
+# x_size = 600
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# comparison_transformation_image.plot(cropped_input_path, output_path, r_s, x_size, Z_end)
+#
+# input_path = 'input_transformable_images//nebula.jpg'
+# r_s = 0.8
+# Z_end = 20
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# comparison_transformation_image.plot(cropped_input_path, output_path, r_s, x_size, Z_end)
+#
+# input_path = 'input_transformable_images//whatever_this_is.jpg'
+# r_s = 0.3
+# Z_end = 30
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# comparison_transformation_image.plot(cropped_input_path, output_path, r_s, x_size, Z_end)
 

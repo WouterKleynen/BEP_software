@@ -55,8 +55,8 @@ def sphere_circle(output_path):
             output_image = cv2.circle(output_image, (round(width / 2), round(width / 2)), round(1.3 * radius),
                                       (0, 0, 0), -1)
             cv2.imwrite(new_path, output_image)
-            cv2.imshow('image', output_image)
-            cv2.waitKey(0)
+            # cv2.imshow('image', output_image)
+            # cv2.waitKey(0)
             break
         # print(output_image[i, center_height])
 
@@ -153,10 +153,11 @@ def create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end):
     output_image[0, 0] = R, G, B
     output_image = cv2.circle(output_image, (round(x_size / 2), round(y_size / 2)), math.ceil(1.3*black_radius), (0, 0, 0),
                               -1)
+    sphere_circle(output_path)
     cv2.imwrite(output_path, output_image)
-    cv2.imshow('image', output_image)
-    cv2.waitKey(0)
-    return x_size, y_size
+    # cv2.imshow('image', output_image)
+    # cv2.waitKey(0)
+    return x_size, input_path, output_path
 
 
 # sphere_circle('output_transformable_images//hubble.jpg')
