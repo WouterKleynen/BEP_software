@@ -12,7 +12,7 @@ def euler_method(initial, n, dt, r_s):
     v_3    = np.ones(n) * initial[7]
 
     for i in range(1, n):
-        v_0[i] = (-r_s / (r[i-1] * (r[i-1] - r_s)) * v_0[i - 1] * v_1[i - 1]) * dt + v_0[i - 1]
+        v_0[i] = (r_s / (r[i-1] * (r[i-1] - r_s)) * v_0[i - 1] * v_1[i - 1]) * dt + v_0[i - 1]
         v_1[i] = (-(r_s * (r[i-1] - r_s) / (2.0 * r[i-1] ** 3)) * v_0[i - 1] ** 2 + (r_s / (2 * r[i-1] * (r[i-1] - r_s))) *
                   v_1[i - 1] ** 2 + (r[i-1] - r_s) * (v_2[i - 1] ** 2 + np.sin(theta[i-1]) ** 2 * v_3[i - 1] ** 2)) * dt + v_1[i - 1]
         v_2[i] = (- (2.0 / r[i-1]) * v_2[i - 1] * v_1[i - 1] + np.sin(theta[i-1]) * np.cos(theta[i-1]) * v_3[i - 1] ** 2) * dt + v_2[
@@ -28,7 +28,7 @@ def euler_method(initial, n, dt, r_s):
 
 def python_solver(initial_values, t, r_s):
     t, r, theta, phi, v_zero, v_one, v_two, v_three = initial_values
-    d_v_zero = - r_s / (r * (r - r_s)) * v_zero * v_one
+    d_v_zero = r_s / (r * (r - r_s)) * v_zero * v_one
     d_v_one = - (r_s * (r - r_s) / (2.0 * r ** 3)) * v_zero ** 2 + (r_s / (2 * r * (r - r_s))) * v_one ** 2 + \
                   (r - r_s) * (v_two ** 2 + np.sin(theta) ** 2 * v_three ** 2)
     d_v_two = - (2.0 / r) * v_two * v_one + np.sin(theta) * np.cos(theta) * v_three ** 2
