@@ -25,7 +25,7 @@ def create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s, Z_end):
         return None
 
 
-def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
+def create_geodesics_field(dt, t_end, field_size, r_s, Z_end, plot=False):
     if plot:
         fig = plt.figure()
         ax = plt.axes(projection='3d')
@@ -41,7 +41,7 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
             y_start_series_schwarzschild.append(y_start)
             # print('x start = ' + str(x_start), 'y start = ' + str(y_start), 'z start = ' + str(z_start))
             try:
-                results = create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s)
+                results = create_specified_geodesic(x_start, y_start, z_start, dt, t_end, r_s, Z_end)
                 if results is not None:
                     r, theta, phi = results
                     X, Y, Z = ccs.spherical_to_cartesian(r, theta, phi)
@@ -63,7 +63,7 @@ def create_geodesics_field(dt, t_end, field_size, r_s, plot=False):
                 # print('Zero division error') -> origin
                 continue
     # For some reason the solver skips the first geodesic, (I have no idea why), this calculates it specifially agai
-    r, theta, phi = create_specified_geodesic(field_size / 2, field_size / 2, -10, dt, t_end, r_s)
+    r, theta, phi = create_specified_geodesic(field_size / 2, field_size / 2, -10, dt, t_end, r_s, Z_end)
     X, Y, Z = ccs.spherical_to_cartesian(r, theta, phi)
     x_end_series_schwarzschild.append(X[-1])
     y_end_series_schwarzschild.append(Y[-1])

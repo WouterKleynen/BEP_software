@@ -86,20 +86,25 @@ t_end = 40
 # plotter.plot_three_dimensional_spherical(r_solver, theta_solver, phi_solver, "3D plot by using a python solver for Schwarzschild geodesic")
 
 # Plot the geodesics of the Schwarzschild space
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 11, 6, r_s, True)
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 13, 6, r_s, True)
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 15, 6, r_s, True)
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 17, 6, r_s, True)
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 20, 6, r_s, True)
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, 6, r_s, True)
+Z_end = 10
+r_s = 1
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 11, 6, r_s, Z_end, True)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 13, 6, r_s, Z_end, True)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 15, 6, r_s, Z_end, True)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 17, 6, r_s, Z_end, True)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 20, 6, r_s, Z_end, True)
+x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, 6, r_s, Z_end, True)
 
 # schwarzschild_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Schwarzschild')
 # schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
 
+
 # input_path = 'input_transformable_images//100x100_car.jpg'
 # r_s = 0.4
 # Z_end = 10
-# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, 20)
+# Figure 23
+# x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+# Figure 24
 # comparison_transformation_image.plot(input_path, output_path, r_s, x_size, Z_end)
 
 # input_path = 'input_transformable_images//blue_space.jpg'
