@@ -113,36 +113,40 @@ r = 1                          # unit sphere
 # r_s = 0  # No curvature -> Minkowski space
 # x_size = 100  # 100x100 image -> size is 100
 # Z_end = 10  # End location -> same distance from origin as starting position
-# Figure 13 (the image doesn't show I have no idea why)
+# Figure 13 (the image doesn't show I have no idea why) -> ToDO fix
 # comparison_transformation_image.plot(input_path, output_path, r_s, x_size, Z_end)
 
 # Figure 14 right
 # pixel_transformation.create_transformed_minkowski_image(dt, t_end, input_path)
 
-# Define r_s
-# r_s = 0.4
-#
-# # define initial condtion for Schwarzschild metric
-# initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]
-#
-# t_end = 40
 
-# Eulers method for Schwarzschild metric
+r_s = 0.4  # Define r_s
+initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]  # define initial condtion for Schwarzschild metric
+t_end = 40
+
+# Eulers method for Schwarzschild metric (Optional)
 # t_numerical, r_numerical, theta_numerical, phi_numerical, v_0_numerical, v_1_numerical, v_2_numerical, v_3_numerical = schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)
 # plotter.plot_trajectories(t, r_numerical, theta_numerical, phi_numerical, "trajectories by using eulers method for Schwarzschild geodesic")
 # plotter.plot_three_dimensional_spherical(r_numerical, theta_numerical, phi_numerical, "3D plot by using eulers method for Schwarzschild geodesic")
 
 # Python solver for Schwarzschild space
-# U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
-# r_solver       = U[:, 1]
-# theta_solver   = U[:, 2]
-# phi_solver     = U[:, 3]
-#
-# # Plot Figure 17
-# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
-#
-#
-# r_s = 0.8
+U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
+r_solver       = U[:, 1]
+theta_solver   = U[:, 2]
+phi_solver     = U[:, 3]
+
+# Plot Figure 16
+plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
+
+r_s = 0.8
+U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
+r_solver       = U[:, 1]
+theta_solver   = U[:, 2]
+phi_solver     = U[:, 3]
+
+# Plot Figure 17
+plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
+
 
 # Plot the geodesics of the Schwarzschild space
 # Z_end = 10
