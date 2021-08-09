@@ -113,7 +113,8 @@ r = 1                          # unit sphere
 # r_s = 0  # No curvature -> Minkowski space
 # x_size = 100  # 100x100 image -> size is 100
 # Z_end = 10  # End location -> same distance from origin as starting position
-# Figure 13 (the image doesn't show I have no idea why) -> ToDO fix
+# Figure 13 (the image doesn't show I have no idea why) ->
+# ToDO fix the issue that causes the image to not appear
 # comparison_transformation_image.plot(input_path, output_path, r_s, x_size, Z_end)
 
 # Figure 14 right
@@ -121,8 +122,8 @@ r = 1                          # unit sphere
 
 
 r_s = 0.4  # Define r_s
-initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]  # define initial condtion for Schwarzschild metric
-t_end = 40
+# initial_schwarzschild = [1, 1, 1, 1, 1, 1, 1, 1]  # define initial condtion for Schwarzschild metric
+t_end = 40  # Take big t end value
 
 # Eulers method for Schwarzschild metric (Optional)
 # t_numerical, r_numerical, theta_numerical, phi_numerical, v_0_numerical, v_1_numerical, v_2_numerical, v_3_numerical = schwarzschild_numerical_solver.euler_method(initial_schwarzschild, n, dt, r_s)
@@ -130,31 +131,98 @@ t_end = 40
 # plotter.plot_three_dimensional_spherical(r_numerical, theta_numerical, phi_numerical, "3D plot by using eulers method for Schwarzschild geodesic")
 
 # Python solver for Schwarzschild space
-U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
-r_solver       = U[:, 1]
-theta_solver   = U[:, 2]
-phi_solver     = U[:, 3]
+# U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
+# r_solver       = U[:, 1]
+# theta_solver   = U[:, 2]
+# phi_solver     = U[:, 3]
 
 # Plot Figure 16
-plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
+# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
 
-r_s = 0.8
-U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
-r_solver       = U[:, 1]
-theta_solver   = U[:, 2]
-phi_solver     = U[:, 3]
+# r_s = 0.8
+# U = odeint(schwarzschild_numerical_solver.python_solver, initial_schwarzschild, t, (r_s, ))
+# r_solver       = U[:, 1]
+# theta_solver   = U[:, 2]
+# phi_solver     = U[:, 3]
 
 # Plot Figure 17
-plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
+# plotter.plot_trajectories(t, r_solver, theta_solver, phi_solver, "trajectories of the geodsic by using a python solver for Schwarzschild metric")
 
 
 # Plot the geodesics of the Schwarzschild space
 # Z_end = 10
 # r_s = 1
-# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, 6, r_s, Z_end, True)
+# field_size = 6
 
+# Figure 19
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, field_size, r_s, Z_end, True)
+# Figure 21 left
 # schwarzschild_geodesic_construction.create_scatter(x_start, y_start, 'starting postions field Schwarzschild')
+# Figure 21 right
 # schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
+
+# IN ORDER TO PLOT ALL PLOTS FROM Figure 18 and Figure 20,21 middle:
+# The events from the solver need to be removed in line 36 of solver_with_events.py
+# Line 45 of solver_with_events.py needs to be uncommented and line 43 needs to be commented
+# Line 36-41 of solver_with_events.py need to be removed
+# Line 49-50 of schwarzschild_geodesic_construction.py needs to be removed
+# THEN AND ONLY THEN THE FOLLOWING PLOTS WILL RUN CORRECT AND WITHOUT ERROR
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, 5, field_size, r_s, Z_end, True)
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, 10, field_size, r_s, Z_end, True)
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, 11, field_size, r_s, Z_end, True)
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, 17, field_size, r_s, Z_end, True)
+# schwarzschild_geodesic_construction.create_geodesics_field(dt, 20, field_size, r_s, Z_end, True)
+# Figure 20
+# x_start, y_start, x_end, y_end = schwarzschild_geodesic_construction.create_geodesics_field(dt, 40, field_size, r_s, Z_end, True)
+# Figure 21 middle
+# schwarzschild_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Schwarzschild')
+# toDo Need to implent this so figure 18, 20 21 middle works with a different function
+
+input_path = 'input_transformable_images//100x100_car.jpg'
+r_s = 0.4
+Z_end = 10
+# Figure 23 right
+x_size, cropped_input_path, output_path = pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+# Figure 24
+comparison_transformation_image.plot(cropped_input_path, output_path, r_s, x_size, Z_end)
+
+r_s = 0.2
+Z_end = 10
+# Figure 25 left
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+r_s = 0.4
+Z_end = 10
+# Figure 25 middle
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+r_s = 0.8
+Z_end = 10
+# Figure 25 right
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+r_s = 0.2
+Z_end = 5
+# Figure 26 left
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+r_s = 0.4
+Z_end = 10
+# Figure 26 middle
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+r_s = 0.8
+Z_end = 20
+# Figure 26 right
+pixel_transformation.create_transformed_schwarzschild_image(input_path, dt, t_end, r_s, Z_end)
+
+
+# Section 8
+
+# Figure 28
+input_path = 'input_transformable_images//600x600_space.jpg'
+r_s = 0.5
+Z_end = 20
 
 # input_path = 'input_transformable_images//starry_night.jpg'
 # r_s = 0.5

@@ -42,7 +42,7 @@ def python_solver_with_termination(t, tend, V, r_s, Z_end):
     if sol.status == 0:
         return None
         # print('Z = 10 was NOT reached, but the proces was finised')
-    # return sol.y # -> Toggle this on to see all geodesics including lost ones
+        # return sol.y # -> Toggle this on to see all geodesics including lost ones
 
 
 

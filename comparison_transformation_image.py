@@ -38,5 +38,8 @@ def plot(input_path, output_path, r_s, x_size, Z_end):
     extension = os.path.splitext(input_path)[1]
     comparison_path = 'comparison_images//' + title[1] + str(extension), '_transformed' + '_r_s='+str(r_s) + '_Z_end=' + str(Z_end)+ str(extension)
     plt.show()
-    plt.savefig(comparison_path)
+    try:
+        plt.savefig(comparison_path)
+    except AttributeError:
+        return
 
