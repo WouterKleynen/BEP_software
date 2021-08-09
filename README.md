@@ -1,2 +1,2 @@
 # BEP_software
-Hier staat alle code die gebruikt is voor mijn BEP
+This repository contains all Python code used in my Applied Mathematics thesis
