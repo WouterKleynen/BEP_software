@@ -106,10 +106,18 @@ r = 1                          # unit sphere
 # Figure 12 right
 # minkowski_geodesic_construction.create_scatter(x_end, y_end, 'end postions field Minkowski space')
 
+# Define input path
 # input_path = 'input_transformable_images//100x100_car.jpg'
-# output_path = 'output_transformable_images//100x100_car_output.jpg'
+# Define 'output' path
+# output_path = 'output_transformable_images//question_mark.png'
+# r_s = 0  # No curvature -> Minkowski space
+# x_size = 100  # 100x100 image -> size is 100
+# Z_end = 10  # End location -> same distance from origin as starting position
+# Figure 13 (the image doesn't show I have no idea why)
+# comparison_transformation_image.plot(input_path, output_path, r_s, x_size, Z_end)
 
-# pixel_transformation.create_transformed_minkowski_image(dt, t_end, input_path, output_path)
+# Figure 14 right
+# pixel_transformation.create_transformed_minkowski_image(dt, t_end, input_path)
 
 # Define r_s
 # r_s = 0.4
