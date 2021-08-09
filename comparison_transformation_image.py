@@ -15,7 +15,7 @@ def plot(input_path, output_path, r_s, x_size, Z_end):
 
     X_high = xx
     Y_high = yy
-    Z_high = Z_end+ zz
+    Z_high = Z_end + zz
     # # create the figure
     fig = plt.figure()
 
